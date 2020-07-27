@@ -7,12 +7,35 @@ Vue.use(VueRouter)
   {
     path: '',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    meta: {
+      auth: false
+    }
   },
   {
-    path: 'Products',
+    path: '/Products',
     name: 'Products',
-    component: () => import('../views/Products.vue')
+    component: () => import('../views/Products.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  // Admin Page
+  {
+    path: '/Login',
+    name: 'Login',
+    component: () => import('../views/admin/Login.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: '/Dashboard',
+    name: 'Dashboard',
+    component: () => import('../views/admin/Dashboard.vue'),
+    meta: {
+      auth: true
+    }
   }
 ]
 

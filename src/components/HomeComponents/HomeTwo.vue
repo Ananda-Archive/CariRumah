@@ -1,20 +1,42 @@
 <template>
-     <v-container fluid class="fill-height">
-            <v-row align="center" justify="center">
-                <v-img max-height="500px" src="@/assets/promo.jpg"></v-img>
+     <v-parallax
+        id="promo"
+        :height="breakPoint ? 600 : 500"
+        src="@/assets/promo.jpg"
+     >
+        <v-container fill-height>
+            <v-overlay opacity="0.8" :absolute="true"></v-overlay>
+            <v-row class="mx-auto" style="z-index:10000">
+                <v-col cols="12" class="text-center changeFont">
+                    <h2>KATALOG PROMO</h2>
+                </v-col>
+                <v-col cols="12">
+                    <div class="text-center">
+                        <v-btn large outlined dark>
+                            <span>SELENGKAPNYA<v-icon class="ml-1">mdi-open-in-new</v-icon></span>
+                        </v-btn>
+                    </div>
+                </v-col>
             </v-row>
-    </v-container>
+        </v-container>
+     </v-parallax>
 </template>
 
 <script>
 export default {
+    name: 'HomeTwo',
 
+    computed: {
+        breakPoint() {
+            if (this.$vuetify.breakpoint.name == 'xs') {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
 }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-    .changeFontPromo {
-        font-family: 'Open Sans', sans-serif;
-    }
 </style>

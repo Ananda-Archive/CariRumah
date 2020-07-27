@@ -1,10 +1,10 @@
 <template>
     <v-app>
-        <v-content>
             <home-one></home-one>
-            <!-- <home-two></home-two> -->
+            <home-two></home-two>
+            <home-three></home-three>
             <whatsapp-floating-button></whatsapp-floating-button>
-        </v-content>
+            <footer-layout></footer-layout>
     </v-app>
 </template>
 
@@ -12,27 +12,30 @@
 
 // Component Import
 import HomeOne from '@/components/HomeComponents/HomeOne.vue'
-// import HomeTwo from '@/components/HomeComponents/HomeTwo.vue'
+import HomeTwo from '@/components/HomeComponents/HomeTwo.vue'
+import HomeThree from '@/components/HomeComponents/HomeThree.vue'
 import WhatsappFloatingButton from '@/components/WhatsAppFloatingButton.vue'
+import FooterLayout from '@/components/FooterLayout.vue'
 
 export default {
     name: 'Home',
 
     components: {
         HomeOne,
-        // HomeTwo,
+        HomeTwo,
+        HomeThree,
         WhatsappFloatingButton,
-
+        FooterLayout
     }
 }
 </script>
 
 <style>
-body::-webkit-scrollbar {
-    display: none; /* Hide vertical scrollbar */
+/* body::-webkit-scrollbar {
+    display: none; 
 }
 body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+} */
 </style>

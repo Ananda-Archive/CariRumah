@@ -1,7 +1,7 @@
 <template>
-    <v-container fluid class="fill-height" style="background:#1E68E8">
+    <v-container fluid fill-height style="height:100vh;background:#1E68E8">
             <v-row align="center" justify="center">
-                <v-col cols="12" class="mt-n12">
+                <v-col cols="12">
                     <v-row justify="center"><v-img src="@/assets/logo-white.png" max-width="200px"></v-img></v-row>
                 </v-col>
                 <v-col cols="12" sm="12" md="7" class="mt-4">

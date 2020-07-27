@@ -58,20 +58,20 @@
                     <v-divider></v-divider>
                     <v-list dense>
                         <v-list-item link>
-                            <v-list-item-icon><v-icon :class="[this.$route.name=='Dashboard' ? 'orange--text' : '']">mdi-folder-home</v-icon></v-list-item-icon>
-                            <v-list-item-title :class="[this.$route.name=='Dashboard' ? 'orange--text' : '']">Produk</v-list-item-title>
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='Dashboard' ? 'primary--text' : '']">mdi-folder-home</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='Dashboard' ? 'primary--text' : '']">Produk</v-list-item-title>
                         </v-list-item>
                         <v-list-item link>
-                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'orange--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
-                            <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'orange--text' : '']">Daftar Mitra</v-list-item-title>
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">Daftar Mitra</v-list-item-title>
                         </v-list-item>
                         <v-list-item link>
-                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminAgent' ? 'orange--text' : '']">mdi-account-multiple-check</v-icon></v-list-item-icon>
-                            <v-list-item-title :class="[this.$route.name=='AdminAgent' ? 'orange--text' : '']">Daftar Agen</v-list-item-title>
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminAgent' ? 'primary--text' : '']">mdi-account-multiple-check</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='AdminAgent' ? 'primary--text' : '']">Daftar Agen</v-list-item-title>
                         </v-list-item>
                         <v-list-item link>
-                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminSeminar' ? 'orange--text' : '']">mdi-account-tie-voice</v-icon></v-list-item-icon>
-                            <v-list-item-title :class="[this.$route.name=='AdminSeminar' ? 'orange--text' : '']">Daftar Seminar</v-list-item-title>
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminSeminar' ? 'primary--text' : '']">mdi-account-tie-voice</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='AdminSeminar' ? 'primary--text' : '']">Daftar Seminar</v-list-item-title>
                         </v-list-item>
                     </v-list>
                 </div>

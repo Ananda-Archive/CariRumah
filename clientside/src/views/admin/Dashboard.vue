@@ -22,13 +22,13 @@
                     </v-btn>
                     <v-dialog v-model="createDialog" max-width="1100px" persistent>
                         <v-card>
-                            <v-toolbar dense flat>
+                            <v-toolbar dense flat dark color="primary">
                                 <span class="title font-weight-light">Tambah Produk</span>
                                 <v-btn absolute right icon @click="close"><v-icon>mdi-close</v-icon></v-btn>
                             </v-toolbar>
                             <v-card-text>
                                 <v-row>
-                                    <v-col cols="12">
+                                    <v-col cols="12" class="mt-2">
                                         <v-text-field
                                             v-model="product.name"
                                             label="Nama Produk"
@@ -71,6 +71,35 @@
                                             <template v-slot:label>Luas Bangunan (m<sup>2</sup>)</template>
                                         </v-text-field>
                                     </v-col>
+                                    <v-col cols="12" sm="12" md="6" class="mt-n6">
+                                        <v-autocomplete
+                                            outlined
+                                            label="Lokasi"
+                                            v-model="product.location"
+                                            :items="getProvince"
+                                            item-text="nama"
+                                            item-value="nama"
+                                            :search-input.sync="filterSyncLocation"
+                                            :clearable="true"
+                                            :auto-select-first="true"
+                                            :readonly="product.location != null"
+                                            @click:clear='product.location = null'
+                                        >
+                                        </v-autocomplete>
+                                    </v-col>
+                                    <v-col cols="12" sm="12" md="6" class="mt-n6">
+                                        <v-text-field
+                                            v-model="product.contactPerson"
+                                            outlined
+                                            label="Contact Person"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" class="mt-n6">
+                                        <vue-editor :editorToolbar="customToolbar.facility" placeholder="Fasilitas" v-model="product.facility"></vue-editor>
+                                    </v-col>
+                                    <v-col cols="12" >
+                                        <vue-editor :editorToolbar="customToolbar.desc" placeholder="Deskripsi" v-model="product.desc"></vue-editor>
+                                    </v-col>
                                 </v-row>
                             </v-card-text>
                         </v-card>
@@ -82,8 +111,15 @@
 </template>
 
 <script>
+
+import { VueEditor } from "vue2-editor";
+
 export default {
     name: 'Dashboard',
+
+    components: {
+        VueEditor
+    },
 
     data() {
         return {
@@ -98,11 +134,33 @@ export default {
                     name:'Bekas'
                 }
             ],
+            filterSyncLocation:'',
+            customToolbar: {
+                facility: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{'align': ''}, {'align': 'center'}, {'align': 'right'}, {'align': 'justify'}],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    ['clean'],
+                ],
+                desc: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{'align': ''}, {'align': 'center'}, {'align': 'right'}, {'align': 'justify'}],
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    ['link'],
+                    [{ 'direction': 'rtl' }],
+                    ['clean'],
+                ]
+            },
             // Object For CRUD Goes Here
             product: {
                 name:'',
                 price:'',
-                location:'',
+                location:null,
                 lb:'',
                 lt:'',
                 condition:'',
@@ -113,7 +171,7 @@ export default {
             productDefault: {
                 name:'',
                 price:'',
-                location:'',
+                location:null,
                 lb:'',
                 lt:'',
                 condition:'',
@@ -130,6 +188,12 @@ export default {
         close() {
             this.createDialog = false
         }
+    },
+
+    computed: {
+        getProvince() {
+            return this.$store.state.province.province
+        },
     }
 }
 </script>

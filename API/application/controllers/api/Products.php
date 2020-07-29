@@ -29,20 +29,24 @@ class Products extends REST_Controller {
         $document = $this->post('document');
         $lt = $this->post('lt');
         $lb = $this->post('lb');
+        $contactPerson = $this->post('contactPerson');
+        $productCondition = $this->post('productCondition');
         $images = $this->post('images');
 
         if(
-            !isset($name) || !isset($price) || !isset($location) || !isset($facility) || !isset($document) || !isset($images) || !isset($lt) || !isset($lb)
+            !isset($name) || !isset($price) || !isset($location) /*|| !isset($facility) || !isset($document) */|| !isset($images) || !isset($lt) || !isset($lb) || !isset($contactPerson) || !isset($productCondition)
         ) {
             $required_parameter = [];
             if(!isset($name)) array_push($required_parameter, 'name');
             if(!isset($price)) array_push($required_parameter, 'price');
             if(!isset($location)) array_push($required_parameter, 'location');
-            if(!isset($facility)) array_push($required_parameter, 'facility');
-            if(!isset($document)) array_push($required_parameter, 'document');
+            // if(!isset($facility)) array_push($required_parameter, 'facility');
+            // if(!isset($document)) array_push($required_parameter, 'document');
             if(!isset($images)) array_push($required_parameter, 'images');
             if(!isset($lt)) array_push($required_parameter, 'lt');
             if(!isset($lb)) array_push($required_parameter, 'lb');
+            if(!isset($contactPerson)) array_push($required_parameter, 'contactPerson');
+            if(!isset($productCondition)) array_push($required_parameter, 'productCondition');
             $this->response(
                 array(
                     'status' => FALSE,
@@ -53,7 +57,7 @@ class Products extends REST_Controller {
         }
 
         // Create
-        if($id = $this->M_Products->create($name,$price,$location,$facility,$document,$lt,$lb)) {
+        if($id = $this->M_Products->create($name,$price,$location,$facility,$document,$lt,$lb,$contactPerson,$productCondition)) {
             // Create row in image
             if($this->M_Products_Image->create($id,$images)) {
                 // Status Message
@@ -113,6 +117,8 @@ class Products extends REST_Controller {
         $lb = $this->put('lb');
         $images = $this->put('images');
         $status = $this->put('status');
+        $contactPerson = $this->put('contactPerson');
+        $productCondition = $this->put('productCondition');
 
         $datas = array();
 
@@ -159,6 +165,12 @@ class Products extends REST_Controller {
         if(isset($status)) {
             $datas = array_merge($datas, array('status' => $status));
         }
+        if(isset($productCondition)) {
+            $datas = array_merge($datas, array('productCondition' => $productCondition));
+        }
+        if(isset($contactPerson)) {
+            $datas = array_merge($datas, array('contactPerson' => $contactPerson));
+        }
 
         if($this->M_Products->update($id, $datas)) {
             if(isset($images)) {
@@ -172,13 +184,24 @@ class Products extends REST_Controller {
                         REST_Controller::HTTP_OK
                     );
                 } else {
-                    $this->response(
-                        array(
-                            'status' => FALSE,
-                            'message' => 'test1'
-                        ),
-                        REST_Controller::HTTP_BAD_REQUEST
-                    );
+                    if(count($images) > 0) {
+                        $this->response(
+                            array(
+                                'status' => TRUE,
+                                'message' => $this::UPDATE_SUCCESS_MESSSAGE
+            
+                            ),
+                            REST_Controller::HTTP_OK
+                        );
+                    } else {
+                        $this->response(
+                            array(
+                                'status' => FALSE,
+                                'message' => $images
+                            ),
+                            REST_Controller::HTTP_BAD_REQUEST
+                        );
+                    }
                 }
             } else {
                 $this->response(

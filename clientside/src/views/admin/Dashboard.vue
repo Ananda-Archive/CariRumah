@@ -8,7 +8,7 @@
                         <v-text-field
                             outlined
                             dense
-                            v-model="search"
+                            v-model="advanceSearch.name"
                             label="Cari Data"
                             prepend-inner-icon="mdi-magnify"
                             :clearable="true"
@@ -18,9 +18,9 @@
                     <!-- List -->
                     <v-col cols="12">
                         <v-data-table
+                            v-if="!breakPoint"
                             :headers="productHeader"
                             :items="products"
-                            :disable-sort="true"
                             style="cursor:pointer"
                         >
                             <template v-slot:item.productIndex="{ item }">
@@ -29,6 +29,61 @@
                             <template v-slot:item.actions="{ item }">
                                 <v-icon class="mr-4" @click.stop="editItem(item)">mdi-pencil</v-icon>
                                 <v-icon @click.stop="confirmDelete(item)">mdi-delete</v-icon>
+                            </template>
+                            <template v-slot:no-data>
+                                <div class="mb-6 mt-md-10"  @click="createDialog = !createDialog">
+                                    <v-icon style="font-size:100px">mdi-folder-home-outline</v-icon>
+                                    <h3 class="mt-3">Belum Ada Data Produk, Ayo Tambahkan!</h3>
+                                </div>
+                            </template>
+                            <template v-slot:no-results>
+                                <div class="mb-6 mt-md-10">
+                                    <v-icon style="font-size:100px">mdi-home-search-outline</v-icon>
+                                    <h3 class="mt-3">Produk yang Anda Cari Tidak Ditemukan</h3>
+                                    <div class="mt-3">
+                                        <v-icon>mdi-emoticon-sad-outline</v-icon>
+                                        <v-icon>mdi-emoticon-sad-outline</v-icon>
+                                        <v-icon>mdi-emoticon-sad-outline</v-icon>
+                                    </div>
+                                </div>
+                            </template>
+                        </v-data-table>
+                        <v-data-table
+                            v-else
+                            :headers="productHeader"
+                            :items="products"
+                            style="cursor:pointer"
+                            :disable-sort="true"
+                            :hide-default-header="true"
+                            class="mb-12 pb-4"
+                        >
+                            <template v-slot:item="{item}">
+                                <v-card class="mt-1 mb-3 mx-2 pa-2" color="primary" dark outlined>
+                                    <div class="d-flex flex-no-wrap justify-space-between align-center">
+                                        <div>
+                                            <v-card-title class="body-2">{{products.indexOf(item)+1}}. {{ item.name }}</v-card-title>
+                                        </div>
+                                        <div class="mt-n2">
+                                            <v-menu
+                                                :close-on-click="true"
+                                                :close-on-content-click="true"
+                                                :offset-y="true"
+                                            >
+                                                <template v-slot:activator="{ on }">
+                                                    <v-card-actions><v-icon v-on="on">mdi-dots-vertical</v-icon></v-card-actions>
+                                                </template>
+                                                <v-list>
+                                                    <v-list-item @click.stop="editItem(item)">
+                                                        <v-list-item-title>Edit Produk</v-list-item-title>
+                                                    </v-list-item>
+                                                    <v-list-item @click.stop="confirmDelete(item)">
+                                                        <v-list-item-title>Hapus Produk</v-list-item-title>
+                                                    </v-list-item>
+                                                </v-list>
+                                            </v-menu>
+                                        </div>
+                                    </div>
+                                </v-card>
                             </template>
                             <template v-slot:no-data>
                                 <div class="mb-6 mt-md-10"  @click="createDialog = !createDialog">
@@ -394,7 +449,9 @@ export default {
         return {
             snackbarMessage: '',
             snackbarColor: '',
-            search:'',
+            advanceSearch: {
+                name:''
+            },
             productCondition: [
                 {
                     id:"1",
@@ -519,6 +576,13 @@ export default {
     },
 
     methods: {
+        // Filter
+        advanceSearchName(val) {
+            if(!this.advanceSearch.name) {
+                return true
+            }
+            return val.toLowerCase().includes(this.advanceSearch.name.toLowerCase())
+        },
         handleFilePondUpdateFile(files) {
             this.myFiles = files.map(files => files.file);
         },
@@ -687,6 +751,13 @@ export default {
     },
 
     computed: {
+        breakPoint() {
+            if (this.$vuetify.breakpoint.name == 'xs') {
+                return true
+            } else {
+                return false
+            }
+        },
         getProvince() {
             return this.$store.state.province.province
         },
@@ -694,7 +765,7 @@ export default {
             if(this.products.length > 0) {
                 return [
                     {text:'No', value:'productIndex', width:'5%', align:'center'},
-                    {text:'Nama', value:'name'},
+                    {text:'Nama', value:'name', filter:this.advanceSearchName},
                     {value:'actions', width:'10%'}
                 ]
             } return []

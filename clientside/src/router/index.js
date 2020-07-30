@@ -36,7 +36,15 @@ Vue.use(VueRouter)
     meta: {
       auth: true
     }
-  }
+  },
+  {
+    path: '/AdminMitra',
+    name: 'AdminMitra',
+    component: () => import('../views/admin/AdminMitra.vue'),
+    meta: {
+      auth: true
+    }
+  },
 ]
 
 const router = new VueRouter({

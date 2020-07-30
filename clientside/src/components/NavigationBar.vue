@@ -57,11 +57,11 @@
                     </template>
                     <v-divider></v-divider>
                     <v-list dense>
-                        <v-list-item link>
+                        <v-list-item link @click="goTo('/Dashboard')">
                             <v-list-item-icon><v-icon :class="[this.$route.name=='Dashboard' ? 'primary--text' : '']">mdi-folder-home</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='Dashboard' ? 'primary--text' : '']">Produk</v-list-item-title>
                         </v-list-item>
-                        <v-list-item link>
+                        <v-list-item link @click="goTo('/AdminMitra')">
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">Daftar Mitra</v-list-item-title>
                         </v-list-item>

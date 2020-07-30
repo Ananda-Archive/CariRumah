@@ -12,7 +12,7 @@
                             label="Cari Data"
                             prepend-inner-icon="mdi-magnify"
                             :clearable="true"
-                            @click:clear="search = ''"
+                            @click:clear="advanceSearch.name = ''"
                         ></v-text-field>
                     </v-col>
                     <!-- List -->

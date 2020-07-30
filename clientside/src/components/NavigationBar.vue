@@ -65,7 +65,7 @@
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">Daftar Mitra</v-list-item-title>
                         </v-list-item>
-                        <v-list-item link>
+                        <v-list-item link @click="goTo('/AdminAgent')">
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminAgent' ? 'primary--text' : '']">mdi-account-multiple-check</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminAgent' ? 'primary--text' : '']">Daftar Agen</v-list-item-title>
                         </v-list-item>

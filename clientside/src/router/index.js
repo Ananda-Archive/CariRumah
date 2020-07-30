@@ -45,6 +45,14 @@ Vue.use(VueRouter)
       auth: true
     }
   },
+  {
+    path: '/AdminAgent',
+    name: 'AdminAgent',
+    component: () => import('../views/admin/AdminAgent.vue'),
+    meta: {
+      auth: true
+    }
+  },
 ]
 
 const router = new VueRouter({

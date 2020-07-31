@@ -4,8 +4,10 @@
             <v-btn icon class="pa-1" @click="goTo('/')"><v-img src="@/assets/logo-white.png" contain width="40"></v-img></v-btn>
             <v-toolbar-title @click="goTo('/')"><span style="cursor:pointer" class="changeFont">CariRumah</span></v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-title class="mr-10"><span class="hoverMenuPromo orange--text" @click="$vuetify.goTo('#promo')"><v-icon class="orange--text">mdi-brightness-percent</v-icon>Promo</span></v-toolbar-title>
+            <!-- <v-toolbar-title class="mr-10"><span class="hoverMenuPromo orange--text" @click="$vuetify.goTo('#promo')"><v-icon class="orange--text">mdi-brightness-percent</v-icon>Promo</span></v-toolbar-title> -->
             <v-toolbar-title class="mr-10" @click="goTo('/Products')"><span :class="[this.$route.name == 'Products' ? 'selectedMenu' : 'hoverMenu']">Produk</span></v-toolbar-title>
+            <v-toolbar-title class="mr-10" @click="goTo('/Credit')"><span :class="[this.$route.name == 'Credit' ? 'selectedMenu' : 'hoverMenu']">Simulasi Kredit</span></v-toolbar-title>
+            <v-toolbar-title class="mr-10" @click="goTo('/Registration')"><span :class="[this.$route.name == 'Registration' ? 'selectedMenu' : 'hoverMenu']">Registrasi</span></v-toolbar-title>
             <v-toolbar-title><span :class="[this.$route.name == 'Contact' ? 'selectedMenu' : 'hoverMenu']">Tentang Kami</span></v-toolbar-title>
         </v-app-bar>
         <v-app-bar v-else-if="breakPoint && this.$route.name != 'Login'" dark app flat color="primary" class="absolute px-2">
@@ -18,13 +20,21 @@
         </v-app-bar>
         <v-navigation-drawer app dark v-model="drawer">
             <v-list dense>
-                <v-list-item link @click="$vuetify.goTo('#promo')">
+                <!-- <v-list-item link @click="$vuetify.goTo('#promo')">
                     <v-list-item-icon><v-icon class="orange--text">mdi-brightness-percent</v-icon></v-list-item-icon>
                     <v-list-item-title class="orange--text">Promo</v-list-item-title>
-                </v-list-item>
+                </v-list-item> -->
                 <v-list-item link @click="goTo('/Products')">
                     <v-list-item-icon><v-icon>mdi-home-search</v-icon></v-list-item-icon>
                     <v-list-item-title>Produk</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="goTo('/Products')">
+                    <v-list-item-icon><v-icon>mdi-calculator</v-icon></v-list-item-icon>
+                    <v-list-item-title>Simulasi Kredit</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="goTo('/Products')">
+                    <v-list-item-icon><v-icon>mdi-form-select</v-icon></v-list-item-icon>
+                    <v-list-item-title>Registrasi</v-list-item-title>
                 </v-list-item>
                 <v-list-item link>
                     <v-list-item-icon><v-icon>mdi-account-multiple</v-icon></v-list-item-icon>
@@ -61,7 +71,7 @@
                             <v-list-item-icon><v-icon :class="[this.$route.name=='Dashboard' ? 'primary--text' : '']">mdi-folder-home</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='Dashboard' ? 'primary--text' : '']">Produk</v-list-item-title>
                         </v-list-item>
-                        <v-list-item link @click="goTo('/AdminMitra')">
+                        <!-- <v-list-item link @click="goTo('/AdminMitra')">
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">Daftar Mitra</v-list-item-title>
                         </v-list-item>
@@ -71,8 +81,8 @@
                         </v-list-item>
                         <v-list-item link>
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminSeminar' ? 'primary--text' : '']">mdi-account-tie-voice</v-icon></v-list-item-icon>
-                            <v-list-item-title :class="[this.$route.name=='AdminSeminar' ? 'primary--text' : '']">Daftar Seminar</v-list-item-title>
-                        </v-list-item>
+                            <v-list-item-title :class="[this.$route.name=='AdminSeminar' ? 'primary--text' : '']">Daftar Seminar</v-list-item-title> -->
+                        <!-- </v-list-item> -->
                     </v-list>
                 </div>
                 <div justify-end>

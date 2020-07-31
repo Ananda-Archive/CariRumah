@@ -20,6 +20,31 @@ Vue.use(VueRouter)
       auth: false
     }
   },
+  {
+    path: '/Registration',
+    component: () => import('../views/RegistrationHome.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'Registration',
+        component: () => import('../views/Registration.vue'),
+        meta: {
+          auth: false
+        }
+      },
+      {
+        path: 'Mitra',
+        name: 'Registration',
+        component: () => import('../views/RegistrationMitra.vue'),
+        meta: {
+          auth: false
+        }
+      }
+    ],
+    meta: {
+      auth: false
+    }
+  },
   // Admin Page
   {
     path: '/Login',
@@ -33,22 +58,6 @@ Vue.use(VueRouter)
     path: '/Dashboard',
     name: 'Dashboard',
     component: () => import('../views/admin/Dashboard.vue'),
-    meta: {
-      auth: true
-    }
-  },
-  {
-    path: '/AdminMitra',
-    name: 'AdminMitra',
-    component: () => import('../views/admin/AdminMitra.vue'),
-    meta: {
-      auth: true
-    }
-  },
-  {
-    path: '/AdminAgent',
-    name: 'AdminAgent',
-    component: () => import('../views/admin/AdminAgent.vue'),
     meta: {
       auth: true
     }

@@ -5,6 +5,14 @@ Vue.use(VueRouter)
 
   const routes = [
   {
+    path:'*',
+    name: 'NotFound',
+    component: () => import('../views/404.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     path: '',
     name: 'Home',
     component: () => import('../views/Home.vue'),

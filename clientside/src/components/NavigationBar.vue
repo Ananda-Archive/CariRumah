@@ -13,8 +13,8 @@
         <v-app-bar v-else-if="breakPoint && this.$route.name != 'Login'" dark app flat color="primary" class="absolute px-2">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
             <v-spacer></v-spacer>
-            <v-btn icon class="pa-1"><v-img src="@/assets/logo-white.png" contain width="40"></v-img></v-btn>
-            <v-toolbar-title><span class="changeFont">CariRumah</span></v-toolbar-title>
+            <v-btn icon class="pa-1" @click="goTo('/')"><v-img src="@/assets/logo-white.png" contain width="40"></v-img></v-btn>
+            <v-toolbar-title @click="goTo('/')"><span class="changeFont">CariRumah</span></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-app-bar-nav-icon color="transparent"/>
         </v-app-bar>
@@ -28,11 +28,11 @@
                     <v-list-item-icon><v-icon>mdi-home-search</v-icon></v-list-item-icon>
                     <v-list-item-title>Produk</v-list-item-title>
                 </v-list-item>
-                <v-list-item link @click="goTo('/Products')">
+                <v-list-item link @click="goTo('/Credit')">
                     <v-list-item-icon><v-icon>mdi-calculator</v-icon></v-list-item-icon>
                     <v-list-item-title>Simulasi Kredit</v-list-item-title>
                 </v-list-item>
-                <v-list-item link @click="goTo('/Products')">
+                <v-list-item link @click="goTo('/Registration')">
                     <v-list-item-icon><v-icon>mdi-form-select</v-icon></v-list-item-icon>
                     <v-list-item-title>Registrasi</v-list-item-title>
                 </v-list-item>

@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid fill-height style="height:100vh;background:#1E68E8">
+    <v-container fluid fill-height style="height:100vh;background: rgb(30,104,232);background: linear-gradient(180deg, rgba(30,104,232,1) 0%, rgba(30,104,232,1) 35%, rgba(0,212,255,1) 100%);">
             <v-row align="center" justify="center">
                 <v-col cols="12">
                     <v-row justify="center"><v-img src="@/assets/logo-white.png" max-width="200px"></v-img></v-row>

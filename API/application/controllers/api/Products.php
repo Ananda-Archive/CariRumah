@@ -31,10 +31,11 @@ class Products extends REST_Controller {
         $lb = $this->post('lb');
         $contactPerson = $this->post('contactPerson');
         $productCondition = $this->post('productCondition');
+        $property = $this->post('property');
         $images = $this->post('images');
 
         if(
-            !isset($name) || !isset($price) || !isset($location) /*|| !isset($facility) || !isset($document) */|| !isset($images) || !isset($lt) || !isset($lb) || !isset($contactPerson) || !isset($productCondition)
+            !isset($name) || !isset($price) || !isset($location) /*|| !isset($facility) || !isset($document) */|| !isset($images) || !isset($lt) || !isset($lb) || !isset($contactPerson) || !isset($productCondition) || !isset($property)
         ) {
             $required_parameter = [];
             if(!isset($name)) array_push($required_parameter, 'name');
@@ -47,6 +48,7 @@ class Products extends REST_Controller {
             if(!isset($lb)) array_push($required_parameter, 'lb');
             if(!isset($contactPerson)) array_push($required_parameter, 'contactPerson');
             if(!isset($productCondition)) array_push($required_parameter, 'productCondition');
+            if(!isset($property)) array_push($required_parameter, 'property');
             $this->response(
                 array(
                     'status' => FALSE,
@@ -57,7 +59,7 @@ class Products extends REST_Controller {
         }
 
         // Create
-        if($id = $this->M_Products->create($name,$price,$location,$facility,$document,$lt,$lb,$contactPerson,$productCondition)) {
+        if($id = $this->M_Products->create($name,$price,$location,$facility,$document,$lt,$lb,$contactPerson,$productCondition, $property)) {
             // Create row in image
             if($this->M_Products_Image->create($id,$images)) {
                 // Status Message
@@ -119,6 +121,7 @@ class Products extends REST_Controller {
         $status = $this->put('status');
         $contactPerson = $this->put('contactPerson');
         $productCondition = $this->put('productCondition');
+        $property = $this->put('property');
 
         $datas = array();
 
@@ -170,6 +173,9 @@ class Products extends REST_Controller {
         }
         if(isset($contactPerson)) {
             $datas = array_merge($datas, array('contactPerson' => $contactPerson));
+        }
+        if(isset($property)) {
+            $datas = array_merge($datas, array('property' => $property));
         }
 
         if($this->M_Products->update($id, $datas)) {

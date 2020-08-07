@@ -12,9 +12,10 @@ class M_Products extends CI_Model {
     private $status;
     private $contactPerson;
     private $productCondition;
+    private $property;
     const TABLE_NAME = 'products';
 
-    public function create($name, $price, $location, $facility, $document, $lt, $lb, $contactPerson, $productCondition) {
+    public function create($name, $price, $location, $facility, $document, $lt, $lb, $contactPerson, $productCondition, $property) {
         $this->db->insert($this::TABLE_NAME, array (
             'name' => $name,
             'price' => $price,
@@ -24,7 +25,8 @@ class M_Products extends CI_Model {
             'lt' => $lt,
             'lb' => $lb,
             'contactPerson' => $contactPerson,
-            'productCondition' => $productCondition
+            'productCondition' => $productCondition,
+            'property' => $property
         ));
         return $this->db->insert_id();
     }

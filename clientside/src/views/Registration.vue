@@ -15,7 +15,7 @@
                             </v-col>
                             <v-col cols="1"></v-col>
                             <v-col cols="12" sm="12" md="3">
-                                <v-card flat link  @click="test">
+                                <v-card flat link  @click="goTo('/Registration/Agent')">
                                     <v-alert outlined color="primary">
                                         <v-icon class="primary--text" size="150">mdi-account-multiple-check</v-icon>
                                         <v-card-title class="justify-center">Pendaftaran Agen</v-card-title>

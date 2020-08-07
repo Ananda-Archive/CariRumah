@@ -117,13 +117,27 @@
                             <v-form ref="form">
                                 <v-card-text>
                                     <v-row>
-                                        <v-col cols="12" class="mt-2">
+                                        <v-col cols="12" sm="12" md="6" class="mt-2">
                                             <v-text-field
                                                 v-model="product.name"
                                                 label="Nama Produk"
                                                 outlined
                                                 :rules="rules.name"
                                             ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="6" class="mt-n6 mt-md-2">
+                                            <v-select
+                                                outlined
+                                                label="Jenis Properti"
+                                                v-model="product.property"
+                                                :items="productProperty"
+                                                item-text="name"
+                                                item-value="id"
+                                                :clearable="true"
+                                                @click:clear="product.property = null"
+                                                :rules="rules.property"
+                                            >
+                                            </v-select>
                                         </v-col>
                                         <v-col cols="12" sm="12" md="6" class="mt-n6">
                                             <v-text-field
@@ -472,6 +486,36 @@ export default {
                     name:'Terjual'
                 }
             ],
+            productProperty: [
+                {
+                    id:1,
+                    name:'Perumahan'
+                },
+                {
+                    id:2,
+                    name:'Rumah Dijual'
+                },
+                {
+                    id:3,
+                    name:'Tanah Dijual'
+                },
+                {
+                    id:4,
+                    name:'Rumah Disewakan'
+                },
+                {
+                    id:5,
+                    name:'Tanah Disewakan'
+                },
+                {
+                    id:6,
+                    name:'Jual Kos'
+                },
+                {
+                    id:7,
+                    name:'Sewa Kos'
+                }
+            ],
             filterSyncLocation:'',
             customToolbar: {
                 facility: [
@@ -513,6 +557,7 @@ export default {
                 document:null,
                 contactPerson:'',
                 status:null,
+                porperty:null,
                 images:[]
             },
             productDefault: {
@@ -527,6 +572,7 @@ export default {
                 document:null,
                 contactPerson:'',
                 status:null,
+                porperty:null,
                 images:[]
             },
             // Rules Goes Here
@@ -560,6 +606,9 @@ export default {
                 ],
                 contactPerson: [
                     v => !!v || 'Kontak Harus Diisi'
+                ],
+                property: [
+                    v => !!v || 'Jenis Properti Harus Diisi'
                 ]
             },
             // Dialog State Goes Here

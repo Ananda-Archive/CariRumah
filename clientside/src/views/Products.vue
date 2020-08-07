@@ -186,6 +186,14 @@ export default {
                     {
                         id:5,
                         name:'Tanah Disewakan'
+                    },
+                    {
+                        id:6,
+                        name:'Jual Kos'
+                    },
+                    {
+                        id:7,
+                        name:'Sewa Kos'
                     }
                 ],
                 condition: [

@@ -47,6 +47,14 @@ Vue.use(VueRouter)
         meta: {
           auth: false
         }
+      },
+      {
+        path: 'Agent',
+        name: 'Registration',
+        component: () => import('../views/RegistrationAgent.vue'),
+        meta: {
+          auth: false
+        }
       }
     ],
     meta: {

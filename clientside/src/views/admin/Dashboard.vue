@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-content app class="mx-4 my-7 mx-md-10 my-md-n5">
+        <v-main app class="mx-4 my-7 mx-md-10 my-md-n5">
             <div>
                 <v-row justify="center">
                     <!-- Search Feature -->
@@ -406,7 +406,7 @@
                     </v-dialog>
                 </v-row>
             </div>
-        </v-content>
+        </v-main>
         <v-dialog persistent v-model="confirmDeleteDialog" width="500px">
             <v-card>
                 <v-card-title>Konfirmasi</v-card-title>

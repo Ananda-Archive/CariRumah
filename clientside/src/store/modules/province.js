@@ -43,7 +43,7 @@ const province = {
             },
             {
                 "id": 31,
-                "nama": "Dki Jakarta"
+                "nama": "DKI Jakarta"
             },
             {
                 "id": 32,
@@ -55,7 +55,7 @@ const province = {
             },
             {
                 "id": 34,
-                "nama": "Di Yogyakarta"
+                "nama": "DI Yogyakarta"
             },
             {
                 "id": 35,

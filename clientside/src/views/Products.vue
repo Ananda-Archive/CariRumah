@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-content class="ma-12">
+        <v-content class="ma-md-12">
             <v-container>
                 <v-row>
                     <v-col cols="3" v-if="!breakPoint">
@@ -115,8 +115,75 @@
                             :hide-default-header="true"
                             :hide-default-footer="true"
                             :page.sync="pagination.page"
+                            :loading="loadingState"
+                            items-per-page="12"
                             @page-count="pagination.pageCount = $event"
                         >
+                            <template v-slot:body="{items}">
+                                <v-container fluid class="pt-0" v-if="!loadingState && items.length">
+                                    <v-row justify-center>
+                                        <v-col class="text-left" cols="12" sm="12" md="4" xl="3" v-for="(product,idx) in items" :key="idx">
+                                            <v-card width="600px" @click="goTo" style="cursor:pointer">
+                                                <v-img height="200px" :lazy-src="product.images[0].image" :src="product.images[0].image">
+                                                    <v-col cols="12" class="text-right" v-if="product.productCondition == 1">
+                                                        <v-chip
+                                                            text-color="white"
+                                                            color="primary"
+                                                            small
+                                                        >
+                                                            Baru
+                                                        </v-chip>
+                                                    </v-col>
+                                                    <template v-slot:placeholder>
+                                                        <v-row
+                                                            class="fill-height ma-0"
+                                                            align="center"
+                                                            justify="center"
+                                                        >
+                                                            <v-progress-circular indeterminate color="black"></v-progress-circular>
+                                                        </v-row>
+                                                    </template>
+                                                </v-img>
+                                                <v-card-title v-if="$vuetify.breakpoint.lgAndDown">{{product.name.slice(0,15)}}</v-card-title>
+                                                <v-card-title v-if="$vuetify.breakpoint.xl">{{product.name.slice(0,17)}}</v-card-title>
+                                                <v-card-subtitle>{{product.location}}</v-card-subtitle>
+                                                <!-- <v-card-subtitle class="pt-0">{{convertLocation(product.property)}}</v-card-subtitle> -->
+                                                <v-card-text class="mt-n4 black--text">
+                                                    <div class="d-flex flex-no-wrap justify-space-between align-center">
+                                                        <div>
+                                                            <v-card-text class="pl-0 pb-0">Luas Bangunan</v-card-text>
+                                                        </div>
+                                                        <div>
+                                                            <v-card-text class="pr-0 pb-0">{{product.lb}}m<sup>2</sup></v-card-text>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-no-wrap justify-space-between align-center">
+                                                        <div>
+                                                            <v-card-text class="pl-0 pt-2">Luas Tanah</v-card-text>
+                                                        </div>
+                                                        <div>
+                                                            <v-card-text class="pr-0 pt-2">{{product.lt}}m<sup>2</sup></v-card-text>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <v-card-title class="pa-0 primary--text">Rp{{convertCurr(product.price)}}</v-card-title>
+                                                    </div>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                                <v-container fluid class="pt-0" v-else-if="!loadingState && !items.length">
+                                    <v-row justify-center>
+                                        <v-col cols="12" class="text-center">
+                                            <v-icon style="font-size:100px">mdi-home-search-outline</v-icon>
+                                        </v-col>
+                                        <v-col cols="12" class="text-center">
+                                            <h3 class="mt-3">Produk yang Anda Cari Tidak Ditemukan</h3>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </template>
                             <template v-slot:no-data>
                                 <div class="mb-6 mt-md-10">
                                     <v-icon style="font-size:100px">mdi-folder-home-outline</v-icon>
@@ -134,6 +201,15 @@
                                     </div>
                                 </div>
                             </template>
+                            <template v-slot:progress>
+                                <v-container fluid>
+                                    <v-row justify-center>
+                                        <v-col cols="12" class="text-center">
+                                            <v-icon x-large style="font-size:10em" class="primary--text">mdi-loading mdi-spin</v-icon>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </template>
                         </v-data-table>
                         <div class="text-center">
                             <v-pagination v-model="pagination.page" :length="pagination.pageCount" :total-visible="7"></v-pagination>
@@ -146,6 +222,10 @@
 </template>
 
 <script>
+
+import api from '@/api'
+import _ from 'lodash'
+
 export default {
     name:'Products',
 
@@ -211,7 +291,47 @@ export default {
             pagination: {
                 page:1,
                 pageCount:0,
-                itemsPerPage:15
+                itemsPerPage:12
+            },
+            loadingState:true,
+        }
+    },
+
+    mounted() {
+        this.get()
+    },
+
+    methods: {
+        get() {
+            this.loadingState = true
+            api.getAllProduct()
+                .then((response) => {
+                    this.products = response
+                    this.loadingState = false
+                })
+        },
+        convertLocation(id) {
+            // return _.find(this.tags,['id', tag]).tagName
+            return _.find(this.filterItem.property, function(o) { return o.id == id}).name
+        },
+        convertCurr(val) {
+            let temp = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(val)
+            return temp.slice(0, -7)
+        },
+        advanceSearchPrice(val) {
+            if(!this.filter.bottomPrice && !this.filter.topPrice) {
+                return true
+            }
+            if(this.filter.bottomPrice && !this.filter.topPrice) {
+                return +val >= +this.filter.bottomPrice
+            } else {
+                if(!this.filter.bottomPrice && this.filter.topPrice) {
+                    return +val <= +this.filter.topPrice
+                } else {
+                    if(this.filter.bottomPrice && this.filter.topPrice) {
+                        return (+val >= +this.filter.bottomPrice && +val <= +this.filter.topPrice)
+                    }
+                }
             }
         }
     },
@@ -229,11 +349,12 @@ export default {
         },
         productHeader() {
             return [
-                {value:'name', align:' d-none'},
-                {value:'price', align:' d-none'},
-                {value:'location', align:' d-none'},
-                {value:'luasTanah', align:' d-none'},
-                {value:'condition', align:' d-none'},
+                {value:'name', align:' d-none',filter:this.advanceSearchName},
+                {value:'price', align:' d-none', filter:this.advanceSearchPrice},
+                {value:'location', align:' d-none', filter:this.advanceSearchLocation},
+                {value:'lt', align:' d-none', filter:this.advanceSearchlt},
+                {value:'productCondition', align:' d-none', filter:this.advanceSearchProductCondition},
+                {value:'property', align:' d-none', filter:this.advanceSearchProperty},
             ]
         }
     }

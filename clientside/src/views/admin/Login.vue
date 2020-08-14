@@ -62,7 +62,7 @@
 
 <script>
 
-import {firebaseApp} from '../../firebase'
+import firebaseApp from 'firebase'
 
 export default {
     mounted(){

@@ -55,6 +55,14 @@ Vue.use(VueRouter)
         meta: {
           auth: false
         }
+      },
+      {
+        path: 'Seminar',
+        name: 'Registration',
+        component: () => import('../views/RegistrationSeminar.vue'),
+        meta: {
+          auth: false
+        }
       }
     ],
     meta: {

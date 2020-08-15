@@ -42,7 +42,7 @@
                 </v-container> -->
             </v-carousel-item>
         </v-carousel>
-        <v-dialog v-if="!breakPoint" v-model="detailPromo" :max-width="[$vuetify.breakpoint.xl? '1600px' : '1200px']">
+        <v-dialog v-model="detailPromo" :max-width="[$vuetify.breakpoint.xl? '1600px' : '1200px']">
             <v-card >
                 <v-toolbar dense flat color="primary" dark>
                     <span class="title font-weight-light">Detail Promo</span>
@@ -50,7 +50,7 @@
                 </v-toolbar>
                 <v-card-text>
                     <v-row justify-center>
-                        <v-col cols="5" class="text-center">
+                        <v-col cols="12" sm="12" md="5" class="text-center">
                             <v-card>
                                 <v-img :lazy-src="data.img[0]" :src="data.img[0]">
                                     <template v-slot:placeholder>
@@ -65,7 +65,7 @@
                                 </v-img>
                             </v-card>
                         </v-col>
-                        <v-col cols="7">
+                        <v-col cols="12" sm="12" md="7">
                             <v-card-title class="primary--text pt-0"><h1>{{data.name}}</h1></v-card-title>
                             <v-card-text v-html="data.desc"></v-card-text>
                         </v-col>

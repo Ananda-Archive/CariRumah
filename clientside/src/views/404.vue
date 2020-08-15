@@ -4,7 +4,7 @@
             <v-container fill-height fluid>
                 <v-row align-center>
                     <v-col cols="12" class="text-center white--text">
-                        <div style="font-size: 30vh">
+                        <div style="font-size: 20vh">
                             404
                         </div>
                         <div class="text-h2 white--text" style="opacity:.4">

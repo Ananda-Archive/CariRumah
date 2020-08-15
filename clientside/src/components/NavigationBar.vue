@@ -8,7 +8,7 @@
             <v-toolbar-title class="mr-10" @click="goTo('/Products')"><span :class="[this.$route.name == 'Products' ? 'selectedMenu' : 'hoverMenu']">Produk</span></v-toolbar-title>
             <v-toolbar-title class="mr-10" @click="goTo('/Credit')"><span :class="[this.$route.name == 'Credit' ? 'selectedMenu' : 'hoverMenu']">Simulasi Kredit</span></v-toolbar-title>
             <v-toolbar-title class="mr-10" @click="goTo('/Registration')"><span :class="[this.$route.name == 'Registration' ? 'selectedMenu' : 'hoverMenu']">Registrasi</span></v-toolbar-title>
-            <v-toolbar-title><span :class="[this.$route.name == 'Contact' ? 'selectedMenu' : 'hoverMenu']">Tentang Kami</span></v-toolbar-title>
+            <v-toolbar-title @click="goTo('/About')"><span :class="[this.$route.name == 'Contact' ? 'selectedMenu' : 'hoverMenu']">Tentang Kami</span></v-toolbar-title>
         </v-app-bar>
         <v-app-bar v-else-if="breakPoint && this.$route.name != 'Login'" dark app flat color="primary" class="absolute px-2">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
@@ -36,7 +36,7 @@
                     <v-list-item-icon><v-icon>mdi-form-select</v-icon></v-list-item-icon>
                     <v-list-item-title>Registrasi</v-list-item-title>
                 </v-list-item>
-                <v-list-item link>
+                <v-list-item link @click="goTo('/About')">
                     <v-list-item-icon><v-icon>mdi-account-multiple</v-icon></v-list-item-icon>
                     <v-list-item-title>Tentang Kami</v-list-item-title>
                 </v-list-item>

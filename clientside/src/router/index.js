@@ -37,6 +37,14 @@ Vue.use(VueRouter)
     }
   },
   {
+    path: '/ProductsSearch',
+    name: 'Products',
+    component: () => import('../views/ProductsSearch.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     path: '/Registration',
     component: () => import('../views/RegistrationHome.vue'),
     children: [
@@ -64,14 +72,14 @@ Vue.use(VueRouter)
           auth: false
         }
       },
-      {
-        path: 'Seminar',
-        name: 'Registration',
-        component: () => import('../views/RegistrationSeminar.vue'),
-        meta: {
-          auth: false
-        }
-      }
+      // {
+      //   path: 'Seminar',
+      //   name: 'Registration',
+      //   component: () => import('../views/RegistrationSeminar.vue'),
+      //   meta: {
+      //     auth: false
+      //   }
+      // }
     ],
     meta: {
       auth: false

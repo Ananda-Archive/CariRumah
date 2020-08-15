@@ -123,7 +123,7 @@
                                 <v-container fluid class="pt-0" v-if="!loadingState && items.length">
                                     <v-row justify-center>
                                         <v-col class="text-left" cols="12" sm="12" md="4" xl="3" v-for="(product,idx) in items" :key="idx">
-                                            <v-card width="600px" @click="goTo" style="cursor:pointer">
+                                            <v-card width="600px" @click="goTo(product.id)" style="cursor:pointer">
                                                 <v-img height="200px" :lazy-src="product.images[0].image" :src="product.images[0].image">
                                                     <v-col cols="12" class="text-right" v-if="product.productCondition == 1">
                                                         <v-chip
@@ -302,6 +302,9 @@ export default {
     },
 
     methods: {
+        goTo(id) {
+            this.$router.push('/Products/'+id)
+        },
         get() {
             this.loadingState = true
             api.getAllProduct()
@@ -311,7 +314,6 @@ export default {
                 })
         },
         convertLocation(id) {
-            // return _.find(this.tags,['id', tag]).tagName
             return _.find(this.filterItem.property, function(o) { return o.id == id}).name
         },
         convertCurr(val) {

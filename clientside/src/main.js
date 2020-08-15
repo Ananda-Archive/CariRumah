@@ -7,7 +7,7 @@ import axios from 'axios'
 import firebase from'firebase';
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = 'http://api.cari-rumah.com/api'
+axios.defaults.baseURL = 'https://api.cari-rumah.com/api'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUHrynLM_optOeIXSvBOzvI-MZhsQh068",

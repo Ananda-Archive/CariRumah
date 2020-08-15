@@ -55,6 +55,46 @@
                                 :rules="rules.area"
                             ><template v-slot:label>Luas Bangunan (m<sup>2</sup>)</template></v-text-field>
                         </v-col>
+                        <v-col cols="12" sm="12" md="4" class="mt-n6">
+                            <v-select
+                                outlined
+                                v-model="data.property"
+                                label="Jenis Properti"
+                                :items="property"
+                                item-text="name"
+                                item-value="id"
+                                :clearable="true"
+                                @click:clear="data.property = null"
+                                :rules="rules.property"
+                            >
+                            </v-select>
+                        </v-col>
+                        <v-col cols="12" sm="12" md="4" class="mt-n6">
+                            <v-text-field
+                                v-model="data.price"
+                                outlined
+                                :rules="rules.price"
+                                label="Harga"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" class="mt-n6">
+                            <v-textarea
+                                v-model="data.statusSurat"
+                                label="Status Surat"
+                                outlined
+                                :rules="rules.statusSurat"
+                                placeholder="Status Surat (Tanpa Enter)"
+                            ></v-textarea>
+                        </v-col>
+                        <v-col cols="12" class="mt-n6">
+                            <v-textarea
+                                v-model="data.kelengkapanSurat"
+                                label="Kelengkapan Surat"
+                                outlined
+                                :rules="rules.kelengkapanSurat"
+                                placeholder="Kelengkapan Surat (Tanpa Enter)"
+                            ></v-textarea>
+                        </v-col>
                         <v-col cols="12" class="mt-n6">
                             <v-textarea
                                 v-model="data.specification"
@@ -78,6 +118,36 @@
 export default {
     data() {
         return {
+            property: [
+                {
+                    id:1,
+                    name:'Perumahan'
+                },
+                {
+                    id:2,
+                    name:'Rumah Dijual'
+                },
+                {
+                    id:3,
+                    name:'Tanah Dijual'
+                },
+                {
+                    id:4,
+                    name:'Rumah Disewakan'
+                },
+                {
+                    id:5,
+                    name:'Tanah Disewakan'
+                },
+                {
+                    id:6,
+                    name:'Jual Kos'
+                },
+                {
+                    id:7,
+                    name:'Sewa Kos'
+                }
+            ],
             data: {
                 name:'',
                 phoneNumber:'',
@@ -85,7 +155,11 @@ export default {
                 ownerAddress:'',
                 address:'',
                 area:'',
-                specification:''
+                specification:'',
+                statusSurat:'',
+                price:'',
+                property:'',
+                kelengkapanSurat:''
             },
             phone:'+6287731492139',
             rules: {
@@ -113,6 +187,19 @@ export default {
                 specification: [
                     v => !!v || 'Spesifikasi Harus Diisi',
                 ],
+                property: [
+                    v => !!v || 'Jenis Properti Harus Diisi',
+                ],
+                price: [
+                    v => !!v || 'Harga Harus Diisi',
+                    v => v>0 || 'Tidak Valid'
+                ],
+                kelengkapanSurat: [
+                    v => !!v || 'Kelengkapan Surat Harus Diisi',
+                ],
+                statusSurat: [
+                    v => !!v || 'Status Surat Harus Diisi',
+                ]
             },
         }
     },
@@ -120,8 +207,12 @@ export default {
     methods: {
         send() {
             if(this.$refs.form.validate()) {
-                window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress+'%0aAlamat Rumah yang Ingin Dijual/Disewa: '+this.data.address+'%0aLuas Bangunan: '+this.data.area+'%0aSpesifikasi Rumah: '+this.data.specification);
+                window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress+'%0aAlamat Rumah yang Ingin Dijual/Disewa: '+this.data.address+'%0aLuas Bangunan: '+this.data.area+'%0aJenis Properti: '+this.data.property+'%0aHarga: Rp'+this.convertCurr(this.data.price)+'%0aStatus Surat:'+this.data.statusSurat+'%0aKelengkapan Surat: '+this.data.kelengkapanSurat+'%0aSpesifikasi Rumah: '+this.data.specification);
             }
+        },
+        convertCurr(val) {
+            let temp = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(val)
+            return temp.slice(0, -7)
         }
     }
 }

@@ -205,10 +205,10 @@
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" class="mt-n6">
-                                            <vue-editor :rules="rules.facility" :editorToolbar="customToolbar.facility" placeholder="Fasilitas" v-model="product.facility"></vue-editor>
+                                            <vue-editor :rules="rules.facility" :editorToolbar="customToolbar.facility" placeholder="Spesifikasi / Fasilitas" v-model="product.facility"></vue-editor>
                                         </v-col>
                                         <v-col cols="12">
-                                            <vue-editor :rules="rules.document" :editorToolbar="customToolbar.document" placeholder="Deskripsi" v-model="product.document"></vue-editor>
+                                            <vue-editor :rules="rules.document" :editorToolbar="customToolbar.document" placeholder="Dokumen" v-model="product.document"></vue-editor>
                                         </v-col>
                                         <v-col cols="12">
                                             <file-pond
@@ -264,13 +264,27 @@
                                                 item-value="id"
                                             ></v-select>
                                         </v-col>
-                                        <v-col cols="12" class="mt-n6">
+                                        <v-col cols="12" sm="12" md="6" class="mt-n6">
                                             <v-text-field
                                                 v-model="product.name"
                                                 label="Nama Produk"
                                                 outlined
                                                 :rules="rules.name"
                                             ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="6" class="mt-n6">
+                                            <v-select
+                                                outlined
+                                                label="Jenis Properti"
+                                                v-model="product.property"
+                                                :items="productProperty"
+                                                item-text="name"
+                                                item-value="id"
+                                                :clearable="true"
+                                                @click:clear="product.property = null"
+                                                :rules="rules.property"
+                                            >
+                                            </v-select>
                                         </v-col>
                                         <v-col cols="12" sm="12" md="6" class="mt-n6">
                                             <v-text-field
@@ -338,10 +352,10 @@
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" class="mt-n6">
-                                            <vue-editor :rules="rules.facility" :editorToolbar="customToolbar.facility" placeholder="Fasilitas" v-model="product.facility"></vue-editor>
+                                            <vue-editor :rules="rules.facility" :editorToolbar="customToolbar.facility" placeholder="Spesifikasi / Fasilitas" v-model="product.facility"></vue-editor>
                                         </v-col>
                                         <v-col cols="12">
-                                            <vue-editor :rules="rules.document" :editorToolbar="customToolbar.document" placeholder="Deskripsi" v-model="product.document"></vue-editor>
+                                            <vue-editor :rules="rules.document" :editorToolbar="customToolbar.document" placeholder="Dokumen" v-model="product.document"></vue-editor>
                                         </v-col>
                                         <v-col cols="12">
                                             <file-pond
@@ -488,31 +502,31 @@ export default {
             ],
             productProperty: [
                 {
-                    id:1,
+                    id:"1",
                     name:'Perumahan'
                 },
                 {
-                    id:2,
+                    id:"2",
                     name:'Rumah Dijual'
                 },
                 {
-                    id:3,
+                    id:"3",
                     name:'Tanah Dijual'
                 },
                 {
-                    id:4,
+                    id:"4",
                     name:'Rumah Disewakan'
                 },
                 {
-                    id:5,
+                    id:"5",
                     name:'Tanah Disewakan'
                 },
                 {
-                    id:6,
+                    id:"6",
                     name:'Jual Kos'
                 },
                 {
-                    id:7,
+                    id:"7",
                     name:'Sewa Kos'
                 }
             ],

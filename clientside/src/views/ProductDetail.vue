@@ -28,6 +28,15 @@
                                                 <v-col cols="12" class="text-right"><v-btn v-if="n == 2" depressed class="primary" dark @click.stop="index = 0">Lihat Semua Foto ({{productImages.length}})</v-btn></v-col>
                                             </v-row>
                                         </v-container>
+                                        <template v-slot:placeholder>
+                                            <v-row
+                                                class="fill-height ma-0"
+                                                align="center"
+                                                justify="center"
+                                            >
+                                                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                                            </v-row>
+                                        </template>
                                     </v-img>
                                 </v-card>
                             </v-col>

@@ -91,7 +91,7 @@ export default {
                     name:'Promo XXX',
                     desc:'<p><b>Lorem</b> ipsum dolor sit amet, consectetur adipiscing elit. Fusce finibus dui eget erat lacinia iaculis. Nullam vitae lectus tellus. Nulla ut odio quis sapien pharetra interdum at et quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam tempus elit sit amet orci congue tristique. Fusce feugiat ultricies ipsum nec laoreet. Cras feugiat ipsum nec nisi consectetur, in imperdiet justo malesuada. Phasellus porta scelerisque massa. Aliquam efficitur urna ut risus malesuada, sit amet rhoncus ipsum sodales. Suspendisse vitae tortor at diam laoreet scelerisque. In ac erat vel lectus volutpat pretium. Cras vehicula, ipsum et tincidunt consectetur, neque orci consectetur ex, eget elementum orci sapien at nunc. Mauris mattis, justo non sollicitudin finibus, erat neque scelerisque lacus, sit amet accumsan lectus dolor sit amet elit. Aenean non eros vitae magna finibus interdum. Nunc libero orci, sodales sed imperdiet et, rhoncus id diam. Etiam porta facilisis ante et fringilla.</p>',
                     img: [
-                        'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/ezgif-2-62107962e111.jpg?alt=media&token=57b480fc-a0ed-466a-be71-c0988c1a8f0f'
+                        'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/nier_automata-game-logo-2020.jpg?alt=media&token=08121537-36a6-459b-9918-4d60854a62e5'
                     ]
                 },
                 {
@@ -99,7 +99,7 @@ export default {
                     name:'Promo YYY',
                     desc:'Nam et hendrerit ante. Sed sed neque orci. Mauris iaculis condimentum felis, ac fringilla turpis. Praesent ut egestas ex. Suspendisse eget odio at lectus sollicitudin bibendum eu congue dui. Vivamus sit amet lorem at orci tempus porta ut et sem. Phasellus non lectus faucibus risus vehicula bibendum. Donec ac tincidunt dui. Sed ac sodales ligula. Suspendisse efficitur odio urna, eget malesuada lorem ultricies et. In commodo, magna posuere tincidunt varius, quam tellus iaculis orci, id commodo lacus tellus in ipsum. Aenean vestibulum felis sapien, consequat viverra leo dapibus a. Aenean laoreet maximus eros nec ullamcorper. Nunc gravida turpis ac justo efficitur cursus. Praesent et massa enim.',
                     img: [
-                        'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/175327.jpg?alt=media&token=292446cf-00ec-4b76-b4e3-4e4e676f2b6b'
+                        'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/wp1987762-nier-automata-wallpapers.jpg?alt=media&token=b457d2d7-e9e0-44eb-8468-d03ae74cd13e'
                     ]
                 },
             ],

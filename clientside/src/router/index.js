@@ -29,6 +29,14 @@ Vue.use(VueRouter)
     }
   },
   {
+    path: '/Products/:id',
+    name: 'Products',
+    component: () => import('../views/ProductDetail.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     path: '/Registration',
     component: () => import('../views/RegistrationHome.vue'),
     children: [

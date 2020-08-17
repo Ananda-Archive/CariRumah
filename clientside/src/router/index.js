@@ -85,6 +85,14 @@ Vue.use(VueRouter)
       auth: false
     }
   },
+  {
+    path: '/Credit',
+    name: 'Credit',
+    component: () => import('../views/Credit.vue'),
+    meta: {
+      auth: false
+    }
+  },
   // Admin Page
   {
     path: '/Login',

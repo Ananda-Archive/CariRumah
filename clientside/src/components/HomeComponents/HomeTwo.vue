@@ -20,12 +20,12 @@
             </v-row>
         </v-container>
      </v-parallax> -->
-     <v-main class="py-0">
+     <v-main class="py-0" v-if="datas.length > 0">
          <v-carousel height="800" cycle>
             <v-carousel-item
                 v-for="(data,idx) in datas"
                 :key="idx"
-                :src="data.img[0]"
+                :src="data.image"
                 reverse-transition="fade-transition"
                 transition="fade-transition"
                 @click="detail(data)"
@@ -52,7 +52,7 @@
                     <v-row justify-center>
                         <v-col cols="12" sm="12" md="5" class="text-center">
                             <v-card>
-                                <v-img :lazy-src="data.img[0]" :src="data.img[0]">
+                                <v-img :lazy-src="data.image" :src="data.image">
                                     <template v-slot:placeholder>
                                         <v-row
                                             class="fill-height ma-0"
@@ -66,8 +66,8 @@
                             </v-card>
                         </v-col>
                         <v-col cols="12" sm="12" md="7">
-                            <v-card-title class="primary--text pt-0"><h1>{{data.name}}</h1></v-card-title>
-                            <v-card-text v-html="data.desc"></v-card-text>
+                            <v-card-title class="primary--text pt-0"><h1>{{data.title}}</h1></v-card-title>
+                            <v-card-text v-html="data.content"></v-card-text>
                         </v-col>
                     </v-row>
                 </v-card-text>
@@ -79,41 +79,29 @@
 <script>
 
 import _ from 'lodash'
+import api from '@/api'
 
 export default {
     name: 'HomeTwo',
 
+    mounted() {
+        this.get()
+    },
+
     data() {
         return {
-            datas:[
-                {
-                    id:1,
-                    name:'Promo XXX',
-                    desc:'<p><b>Lorem</b> ipsum dolor sit amet, consectetur adipiscing elit. Fusce finibus dui eget erat lacinia iaculis. Nullam vitae lectus tellus. Nulla ut odio quis sapien pharetra interdum at et quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam tempus elit sit amet orci congue tristique. Fusce feugiat ultricies ipsum nec laoreet. Cras feugiat ipsum nec nisi consectetur, in imperdiet justo malesuada. Phasellus porta scelerisque massa. Aliquam efficitur urna ut risus malesuada, sit amet rhoncus ipsum sodales. Suspendisse vitae tortor at diam laoreet scelerisque. In ac erat vel lectus volutpat pretium. Cras vehicula, ipsum et tincidunt consectetur, neque orci consectetur ex, eget elementum orci sapien at nunc. Mauris mattis, justo non sollicitudin finibus, erat neque scelerisque lacus, sit amet accumsan lectus dolor sit amet elit. Aenean non eros vitae magna finibus interdum. Nunc libero orci, sodales sed imperdiet et, rhoncus id diam. Etiam porta facilisis ante et fringilla.</p>',
-                    img: [
-                        'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/nier_automata-game-logo-2020.jpg?alt=media&token=08121537-36a6-459b-9918-4d60854a62e5'
-                    ]
-                },
-                {
-                    id:2,
-                    name:'Promo YYY',
-                    desc:'Nam et hendrerit ante. Sed sed neque orci. Mauris iaculis condimentum felis, ac fringilla turpis. Praesent ut egestas ex. Suspendisse eget odio at lectus sollicitudin bibendum eu congue dui. Vivamus sit amet lorem at orci tempus porta ut et sem. Phasellus non lectus faucibus risus vehicula bibendum. Donec ac tincidunt dui. Sed ac sodales ligula. Suspendisse efficitur odio urna, eget malesuada lorem ultricies et. In commodo, magna posuere tincidunt varius, quam tellus iaculis orci, id commodo lacus tellus in ipsum. Aenean vestibulum felis sapien, consequat viverra leo dapibus a. Aenean laoreet maximus eros nec ullamcorper. Nunc gravida turpis ac justo efficitur cursus. Praesent et massa enim.',
-                    img: [
-                        'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/wp1987762-nier-automata-wallpapers.jpg?alt=media&token=b457d2d7-e9e0-44eb-8468-d03ae74cd13e'
-                    ]
-                },
-            ],
+            datas:[],
             data: {
                 id:null,
-                name:'',
-                desc:'',
-                img:[]
+                title:'',
+                content:'',
+                image:''
             },
             dataDefault: {
-                id:null,
-                name:'',
-                desc:'',
-                img:[]
+                iid:null,
+                title:'',
+                content:'',
+                image:''
             },
             detailPromo:false,
         }
@@ -127,7 +115,13 @@ export default {
         close() {
             this.data = _.cloneDeep(this.dataDefault)
             this.detailPromo = false
-        }
+        },
+        get() {
+            api.getAllPromo()
+                .then((response) => {
+                    this.datas = response
+                })
+        },
     },
 
     computed: {

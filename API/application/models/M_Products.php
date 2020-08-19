@@ -34,6 +34,7 @@ class M_Products extends CI_Model {
     public function get_all() {
         $this->db->select('*');
         $this->db->from($this::TABLE_NAME);
+        $this->db->order_by('id','DESC');
         return $this->db->get()->result_array();
     }
 

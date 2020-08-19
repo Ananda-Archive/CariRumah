@@ -110,6 +110,14 @@ Vue.use(VueRouter)
       auth: true
     }
   },
+  {
+    path: '/Promo',
+    name: 'Promo',
+    component: () => import('../views/admin/Promo.vue'),
+    meta: {
+      auth: true
+    }
+  },
 ]
 
 const router = new VueRouter({

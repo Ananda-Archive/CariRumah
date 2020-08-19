@@ -523,15 +523,15 @@ export default {
 
 <style>
 .toolbar {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 15%;
-  z-index: 1;
-  overflow-y:auto;
+  position: -webkit-sticky!important;
+  position: sticky!important;
+  top: 15%!important;
+  z-index: 1!important;
+  overflow-y:auto!important;
 }
 
 .toolbar::-webkit-scrollbar{
-  display: none;
+  display: none!important;
 }
 
 .v-dialog > .v-card > .v-toolbar {

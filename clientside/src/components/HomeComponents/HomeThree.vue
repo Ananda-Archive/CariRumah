@@ -13,12 +13,12 @@
                         <v-col cols="11" class="text-center">
                             <v-row no-gutters>
                                 <v-col cols="12" sm="12" md="3" v-for="(article,idx) in filteredItems" :key="idx" :class="breakPoint ? 'gridArticle pb-6' : 'gridArticle pr-6 pb-6'">
-                                    <v-card width="400px" align="left">
+                                    <v-card width="400px" align="left" @click="goToArticle(article.id)">
                                         <v-img
                                             aspect-ratio="1"
                                             height="200px" 
-                                            :lazy-src="article.img[0]" 
-                                            :src="article.img[0]"
+                                            :lazy-src="article.image" 
+                                            :src="article.image"
                                             gradient="to bottom, rgba(0,0,0,.4), rgba(0,0,0,.8)"
                                             class="white--text align-end"
                                         >
@@ -37,6 +37,9 @@
                                 </v-col>
                             </v-row>
                         </v-col>
+                        <v-col cols="12" class="text-center">
+                            <v-btn @click="goTo()" class="primary--text" outlined large>lihat artikel lain</v-btn>
+                        </v-col>
                     </v-row>
                 </v-contain>
             </v-container>
@@ -45,54 +48,36 @@
 </template>
 
 <script>
+
+import api from '@/api'
+
 export default {
     name: 'HomeThree',
 
     data() {
         return {
-            articles: [
-                {
-                    id:1,
-                    title: 'Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1Artikel 1',
-                    content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, fuga pariatur provident placeat est, eveniet esse ratione autem repudiandae error debitis eos cum? Eos minima asperiores exercitationem libero eaque molestiae ea, impedit hic praesentium blanditiis. Molestias doloribus a ut voluptatum?',
-                    img: [
-                        'https://source.unsplash.com/random'
-                    ]
-                },
-                {
-                    id:2,
-                    title: 'Artikel 2',
-                    content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, fuga pariatur provident placeat est, eveniet esse ratione autem repudiandae error debitis eos cum? Eos minima asperiores exercitationem libero eaque molestiae ea, impedit hic praesentium blanditiis. Molestias doloribus a ut voluptatum?',
-                    img: [
-                        'https://source.unsplash.com/random'
-                    ]
-                },
-                {
-                    id:3,
-                    title: 'Artikel 3',
-                    content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, fuga pariatur provident placeat est, eveniet esse ratione autem repudiandae error debitis eos cum? Eos minima asperiores exercitationem libero eaque molestiae ea, impedit hic praesentium blanditiis. Molestias doloribus a ut voluptatum?',
-                    img: [
-                        'https://source.unsplash.com/random'
-                    ]
-                },
-                {
-                    id:4,
-                    title: 'Artikel 4',
-                    content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, fuga pariatur provident placeat est, eveniet esse ratione autem repudiandae error debitis eos cum? Eos minima asperiores exercitationem libero eaque molestiae ea, impedit hic praesentium blanditiis. Molestias doloribus a ut voluptatum?',
-                    img: [
-                        'https://source.unsplash.com/random'
-                    ]
-                },
-                {
-                    id:5,
-                    title: 'Artikel 5',
-                    content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, fuga pariatur provident placeat est, eveniet esse ratione autem repudiandae error debitis eos cum? Eos minima asperiores exercitationem libero eaque molestiae ea, impedit hic praesentium blanditiis. Molestias doloribus a ut voluptatum?',
-                    img: [
-                        'https://source.unsplash.com/random'
-                    ]
-                },
-            ]
+            articles: []
         }
+    },
+
+    mounted() {
+        this.get()
+    },
+
+    methods: {
+        get() {
+            api.getAllArticle()
+                .then((response) => {
+                    this.articles = response
+                })
+        },
+        goTo() {
+            this.$router.push('/ListArticle')
+        },
+        goToArticle(id) {
+            this.$router.push('/Article/'+id)
+            window.scrollTo(0,0)
+        },
     },
 
     computed: {

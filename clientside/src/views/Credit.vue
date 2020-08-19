@@ -3,7 +3,7 @@
         <v-content class="ma-md-12">
             <div>
                 <v-container>
-                    <v-form>
+                    <v-form ref="form">
                         <v-row>
                             <v-col cols="12">
                                 <h1 class="font-weight-medium">SIMULASI KPR</h1>
@@ -15,6 +15,7 @@
                                     outlined
                                     placeholder="contoh: 500000000"
                                     v-model="data.loan"
+                                    :rules="rules.loan"
                                 >
                                     <template v-slot:prepend-inner><span class="mr-2 mt-1 primary--text font-weight-bold">Rp</span></template>
                                 </v-text-field>
@@ -25,6 +26,7 @@
                                     outlined
                                     placeholder="contoh: 3"
                                     v-model="data.tenor"
+                                    :rules="rules.tenor"
                                 >
                                     <template v-slot:append><span class="mr-2 mt-1 primary--text font-weight-bold">Tahun</span></template>
                                 </v-text-field>
@@ -35,6 +37,7 @@
                                     outlined
                                     placeholder="contoh: 20"
                                     v-model="data.dp"
+                                    :rules="rules.dp"
                                 >
                                     <template v-slot:append><span class="mr-2 mt-1 primary--text font-weight-bold">%</span></template>
                                 </v-text-field>
@@ -45,6 +48,7 @@
                                     outlined
                                     placeholder="contoh: 12.4"
                                     v-model="data.interest"
+                                    :rules="rules.interest"
                                 >
                                     <template v-slot:append><span class="mr-2 mt-1 primary--text font-weight-bold">% / Tahun</span></template>
                                 </v-text-field>
@@ -52,7 +56,7 @@
                             <v-col cols="12" class="text-center mt-n6">
                                 <v-btn @click="calculate" large dark color="primary">Kalkulasi</v-btn>
                             </v-col>
-                            <v-col cols="12">
+                            <v-col cols="12" v-if="show">
                                 <v-simple-table>
                                     <template v-slot:default>
                                         <thead>
@@ -131,7 +135,25 @@ export default {
                 total:[],
                 init:[]
             },
-
+            rules: {
+                loan: [
+                    v => !!v || 'Harus Diisi',
+                    v => !isNaN(v) || 'Tidak Valid'
+                ],
+                tenor: [
+                    v => !!v || 'Harus Diisi',
+                    v => !isNaN(v) || 'Tidak Valid'
+                ],
+                dp: [
+                    v => !!v || 'Harus Diisi',
+                    v => !isNaN(v) || 'Tidak Valid'
+                ],
+                interest: [
+                    v => !!v || 'Harus Diisi',
+                    v => !isNaN(v) || 'Tidak Valid'
+                ],
+            },
+            show: false,
         }
     },
 
@@ -144,23 +166,26 @@ export default {
             this.emi = Number( (p*r*Math.pow((1+r),n)) / (Math.pow((1+r),(n))-1) )
         },
         calculate() {
-            this.calculateData = _.cloneDeep(this.calculateDataDefault)
-            this.PMT(this.data.loan, this.data.interest, this.data.dp, this.data.tenor)
-            this.n = _.clone(+this.data.tenor)*12
-            this.calculateData.interestAndMain = _.clone(this.emi)
-            for(let i=0; i<this.n; i++) {
-                this.calculateData.init.push(this.init)
-                var a = this.calculateData.init[i] * (+this.data.interest / (12*100))
-                var b = this.calculateData.interestAndMain - a
-                this.init = this.init - b
-                this.calculateData.total.push(this.init)
-                this.calculateData.interest.push(a)
-                this.calculateData.main.push(b)
+            if(this.$refs.form.validate()) {
+                this.show = true
+                this.calculateData = _.cloneDeep(this.calculateDataDefault)
+                this.PMT(this.data.loan, this.data.interest, this.data.dp, this.data.tenor)
+                this.n = _.clone(+this.data.tenor)*12
+                this.calculateData.interestAndMain = _.clone(this.emi)
+                for(let i=0; i<this.n; i++) {
+                    this.calculateData.init.push(this.init)
+                    var a = this.calculateData.init[i] * (+this.data.interest / (12*100))
+                    var b = this.calculateData.interestAndMain - a
+                    this.init = this.init - b
+                    this.calculateData.total.push(this.init)
+                    this.calculateData.interest.push(a)
+                    this.calculateData.main.push(b)
+                }
             }
         },
         convertCurr(val) {
             let temp = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(val)
-            return temp.slice(0, -7)
+            return temp.slice(0, -4)
         },
     }
 }

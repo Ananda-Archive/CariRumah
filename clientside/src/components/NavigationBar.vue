@@ -75,6 +75,10 @@
                             <v-list-item-icon><v-icon :class="[this.$route.name=='Promo' ? 'primary--text' : '']">mdi-brightness-percent</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='Promo' ? 'primary--text' : '']">Promo</v-list-item-title>
                         </v-list-item>
+                        <v-list-item link @click="goTo('/AdminArticle')">
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminArticle' ? 'primary--text' : '']">mdi-file-document-edit</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='AdminArticle' ? 'primary--text' : '']">Artikel</v-list-item-title>
+                        </v-list-item>
                         <!-- <v-list-item link @click="goTo('/AdminMitra')">
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">Daftar Mitra</v-list-item-title>

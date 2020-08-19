@@ -22,12 +22,13 @@
                             :headers="productHeader"
                             :items="products"
                             style="cursor:pointer"
+                            @click:row="editItem"
                         >
                             <template v-slot:item.productIndex="{ item }">
                                 <div class="justify-center">{{products.indexOf(item)+1}}</div>
                             </template>
                             <template v-slot:item.actions="{ item }">
-                                <v-icon class="mr-4" @click.stop="editItem(item)">mdi-pencil</v-icon>
+                                <!-- <v-icon class="mr-4" @click.stop="editItem(item)">mdi-pencil</v-icon> -->
                                 <v-icon @click.stop="confirmDelete(item)">mdi-delete</v-icon>
                             </template>
                             <template v-slot:no-data>
@@ -635,6 +636,11 @@ export default {
     },
 
     mounted() {
+        if(this.uid) {
+            this.$router.push('/Dashboard')
+        } else {
+            this.$router.push('/login')
+        }
         this.get()
     },
 
@@ -814,6 +820,9 @@ export default {
     },
 
     computed: {
+        uid() {
+            return this.$store.state.uid
+        },
         breakPoint() {
             if (this.$vuetify.breakpoint.name == 'xs') {
                 return true

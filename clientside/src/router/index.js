@@ -21,6 +21,22 @@ Vue.use(VueRouter)
     }
   },
   {
+    path: '/ListArticle',
+    name: 'ListArticle',
+    component: () => import('../views/ListArticle.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: '/Article/:id',
+    name: 'ListArticle',
+    component: () => import('../views/ArticleDetail.vue'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     path: '/Products',
     name: 'Products',
     component: () => import('../views/Products.vue'),
@@ -72,14 +88,14 @@ Vue.use(VueRouter)
           auth: false
         }
       },
-      // {
-      //   path: 'Seminar',
-      //   name: 'Registration',
-      //   component: () => import('../views/RegistrationSeminar.vue'),
-      //   meta: {
-      //     auth: false
-      //   }
-      // }
+      {
+        path: 'Seminar',
+        name: 'Registration',
+        component: () => import('../views/RegistrationSeminar.vue'),
+        meta: {
+          auth: false
+        }
+      }
     ],
     meta: {
       auth: false
@@ -114,6 +130,14 @@ Vue.use(VueRouter)
     path: '/Promo',
     name: 'Promo',
     component: () => import('../views/admin/Promo.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/AdminArticle',
+    name: 'AdminArticle',
+    component: () => import('../views/admin/AdminArticle.vue'),
     meta: {
       auth: true
     }

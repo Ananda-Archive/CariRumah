@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const productTable = 'products'
 const promoTable = 'promo'
+const articleTable = 'article'
 const insertSuccessMessage = 'Berhasil ditambahkan'
 const updateSuccessMessage = 'Berhasil diperbarui'
 const deleteSuccessMessage = 'Berhasil dihapus'
@@ -92,7 +93,48 @@ const api = {
                     else reject(deleteFailedMessage)
                 })
         } )
-    },    
+    }, 
+    createArticle(article) {
+        return new Promise ((resolve, reject) => {
+            axios.post(articleTable, article)
+                .then(() => {
+                    resolve(insertSuccessMessage)
+                }) .catch(err => {
+                    if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    getAllArticle() {
+        return new Promise ((resolve, reject) => {
+            axios.get(articleTable)
+                .then((response) => {
+                    resolve(response.data)
+                }) .catch(err => {
+                        if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    updateArticle(article) {
+        return new Promise ((resolve, reject) => {
+            axios.put(articleTable, article)
+                .then(() => {
+                    resolve(updateSuccessMessage)
+                }) .catch(err => {
+                        if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    deleteArticle(id) {
+        return new Promise( (resolve, reject) => {
+            axios.delete(articleTable, {params: {id: id}})
+                .then(() => {
+                    resolve(deleteSuccessMessage)
+                }) .catch(err => {
+                    if(err.response.status == 500) reject(serverErrorMessage)
+                    else reject(deleteFailedMessage)
+                })
+        } )
+    },   
 }
 
 export default api

@@ -40,8 +40,26 @@
                                 :rules="rules.ownerAddress"
                             ></v-textarea>
                         </v-col>
+                        <v-col cols="12">
+                            <file-pond
+                                :allowDrop="!loadingState"
+                                :allowBrowse="!loadingState"
+                                style="cursor: pointer"
+                                name="test"
+                                ref="pond"
+                                label-idle="<span class='filepondFormatText'>Upload Gambar </span><span class='filepondFormatText'>Format: JPG/PNG</span>"
+                                v-bind:files="myFiles"
+                                instant-upload="false"
+                                v-on:updatefiles="handleFilePondUpdateFile"
+                                labelInvalidField="remove"
+                                allow-multiple="true"
+                                max-files="1"
+                                accepted-file-types="image/*"
+                                fileValidateTypeLabelExpectedTypes="Hanya menerima format JPG dan PNG"
+                            />
+                        </v-col>
                         <v-col cols="12" class="text-center">
-                            <v-btn class="blue white--text" x-large width="10%" @click="send">Daftar</v-btn>
+                            <v-btn :disabled="disabledFunc" class="blue white--text" x-large width="10%" @click="send">Daftar</v-btn>
                         </v-col>
                     </v-row>
                 </v-form>
@@ -51,9 +69,25 @@
 </template>
 
 <script>
+
+import firebase from 'firebase';
+import vueFilePond from 'vue-filepond'
+import 'filepond/dist/filepond.min.css'
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import moment from 'moment'
+// import axios from 'axios'
+
+const FilePond = vueFilePond(
+    FilePondPluginFileValidateType,
+)
+
 export default {
+    components: {
+        FilePond
+    },
     data() {
         return {
+            myFiles: [],
             data: {
                 name:'',
                 phoneNumber:'',
@@ -94,15 +128,58 @@ export default {
     },
 
     methods: {
-        send() {
+        async send() {
             if(this.$refs.form.validate()) {
-                window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress+'%0aAlamat Rumah yang Ingin Dijual/Disewa: '+this.data.address+'%0aLuas Bangunan: '+this.data.area+'%0aSpesifikasi Rumah: '+this.data.specification);
+                await this.uploadImg(this.myFiles[0])
+                    .then((response) => {
+                        window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Seminar]%0aNama: '+this.data.name+'%0aBukti Pendaftaran: '+response);
+                    })
             }
+        },
+        handleFilePondUpdateFile(files) {
+            this.myFiles = files.map(files => files.file);
+        },
+        uploadImg(imgFile) {
+            return new Promise((resolve, reject) => {
+                var storageRef = firebase.storage().ref('bukti/'+moment().format('MMDDYYYYhmmss')) 
+                storageRef.put(imgFile)
+                .then((snapshot) => {
+                    resolve(snapshot.ref.getDownloadURL())
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+            })
+        }
+    },
+
+    mounted: {
+        disabledFunc() {
+            
         }
     }
 }
 </script>
 
 <style>
-
+.filepond--file-action-button {
+    cursor: pointer;
+}
+.filepond--drop-label {
+    color: white;
+}
+.filepond--panel-root {
+    background-color: rgba(31, 31, 31, 0.8);
+}
+.filepond--file-action-button {
+    background-color: white;
+    color: red;
+}
+.filepond--item-panel {
+    background-color: green;
+}
+.filepondFormatText {
+    font-size: 12px !important;
+    display: block;
+}
 </style>

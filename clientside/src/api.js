@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const productTable = 'products'
+const promoTable = 'promo'
 const insertSuccessMessage = 'Berhasil ditambahkan'
 const updateSuccessMessage = 'Berhasil diperbarui'
 const deleteSuccessMessage = 'Berhasil dihapus'
@@ -50,8 +51,48 @@ const api = {
                     else reject(deleteFailedMessage)
                 })
         } )
-    }
-
+    },
+    createPromo(promo) {
+        return new Promise ((resolve, reject) => {
+            axios.post(promoTable, promo)
+                .then(() => {
+                    resolve(insertSuccessMessage)
+                }) .catch(err => {
+                    if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    getAllPromo() {
+        return new Promise ((resolve, reject) => {
+            axios.get(promoTable)
+                .then((response) => {
+                    resolve(response.data)
+                }) .catch(err => {
+                        if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    updatePromo(promo) {
+        return new Promise ((resolve, reject) => {
+            axios.put(promoTable, promo)
+                .then(() => {
+                    resolve(updateSuccessMessage)
+                }) .catch(err => {
+                        if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    deletePromo(id) {
+        return new Promise( (resolve, reject) => {
+            axios.delete(promoTable, {params: {id: id}})
+                .then(() => {
+                    resolve(deleteSuccessMessage)
+                }) .catch(err => {
+                    if(err.response.status == 500) reject(serverErrorMessage)
+                    else reject(deleteFailedMessage)
+                })
+        } )
+    },    
 }
 
 export default api

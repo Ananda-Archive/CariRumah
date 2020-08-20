@@ -47,7 +47,7 @@
                                 style="cursor: pointer"
                                 name="test"
                                 ref="pond"
-                                label-idle="<span class='filepondFormatText'>Upload Gambar </span><span class='filepondFormatText'>Format: JPG/PNG</span>"
+                                label-idle="<span class='filepondFormatText'>Upload Gambar Bukti Pembayaran </span><span class='filepondFormatText'>Format: JPG/PNG</span>"
                                 v-bind:files="myFiles"
                                 instant-upload="false"
                                 v-on:updatefiles="handleFilePondUpdateFile"
@@ -70,11 +70,10 @@
 
 <script>
 
-import firebase from 'firebase';
+import api from '@/api'
 import vueFilePond from 'vue-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
-import moment from 'moment'
 // import axios from 'axios'
 
 const FilePond = vueFilePond(
@@ -97,7 +96,7 @@ export default {
                 area:'',
                 specification:''
             },
-            phone:'+6287731492139',
+            phone:'',
             rules: {
                 name: [
                     v => !!v || 'Nama Harus Diisi',
@@ -124,38 +123,47 @@ export default {
                     v => !!v || 'Spesifikasi Harus Diisi',
                 ],
             },
+            loadingState:false
         }
     },
 
+    mounted() {
+        api.getAllAbout() 
+            .then((response) => {
+                this.phone = response[0].phone
+            })
+    },
+
     methods: {
-        async send() {
+        send() {
             if(this.$refs.form.validate()) {
-                await this.uploadImg(this.myFiles[0])
+                this.loadingState = true
+                api.uploadImage(this.myFiles[0])
                     .then((response) => {
-                        window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Seminar]%0aNama: '+this.data.name+'%0aBukti Pendaftaran: '+response);
+                        window.open('https://api.whatsapp.com/send?phone=+62'+this.phone+'&text=[Daftar Seminar]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Pendaftar: '+this.data.ownerAddress+'%0aBukti Pendaftaran: '+response.message);
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                    .finally(() => {
+                        this.loadingState = false
                     })
             }
         },
         handleFilePondUpdateFile(files) {
             this.myFiles = files.map(files => files.file);
         },
-        uploadImg(imgFile) {
-            return new Promise((resolve, reject) => {
-                var storageRef = firebase.storage().ref('bukti/'+moment().format('MMDDYYYYhmmss')) 
-                storageRef.put(imgFile)
-                .then((snapshot) => {
-                    resolve(snapshot.ref.getDownloadURL())
-                })
-                .catch((err) => {
-                    reject(err)
-                })
-            })
-        }
     },
 
-    mounted: {
+    computed: {
         disabledFunc() {
-            
+            if(this.loadingState) {
+                return true
+            }
+            if(this.myFiles.length == 0) {
+                return true
+            }
+            return false
         }
     }
 }

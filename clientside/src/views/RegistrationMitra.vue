@@ -115,6 +115,9 @@
 </template>
 
 <script>
+
+import api from '@/api'
+
 export default {
     data() {
         return {
@@ -161,7 +164,7 @@ export default {
                 property:'',
                 kelengkapanSurat:''
             },
-            phone:'+6287731492139',
+            phone:'',
             rules: {
                 name: [
                     v => !!v || 'Nama Harus Diisi',
@@ -204,10 +207,17 @@ export default {
         }
     },
 
+    mounted() {
+        api.getAllAbout() 
+            .then((response) => {
+                this.phone = response[0].phone
+            })
+    },
+
     methods: {
         send() {
             if(this.$refs.form.validate()) {
-                window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress+'%0aAlamat Rumah yang Ingin Dijual/Disewa: '+this.data.address+'%0aLuas Bangunan: '+this.data.area+'%0aJenis Properti: '+this.data.property+'%0aHarga: Rp'+this.convertCurr(this.data.price)+'%0aStatus Surat:'+this.data.statusSurat+'%0aKelengkapan Surat: '+this.data.kelengkapanSurat+'%0aSpesifikasi Rumah: '+this.data.specification);
+                window.open('https://api.whatsapp.com/send?phone=+62'+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress+'%0aAlamat Rumah yang Ingin Dijual/Disewa: '+this.data.address+'%0aLuas Bangunan: '+this.data.area+'%0aJenis Properti: '+this.data.property+'%0aHarga: Rp'+this.convertCurr(this.data.price)+'%0aStatus Surat:'+this.data.statusSurat+'%0aKelengkapan Surat: '+this.data.kelengkapanSurat+'%0aSpesifikasi Rumah: '+this.data.specification);
             }
         },
         convertCurr(val) {

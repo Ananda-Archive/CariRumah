@@ -51,6 +51,9 @@
 </template>
 
 <script>
+
+import api from '@/api'
+
 export default {
     data() {
         return {
@@ -69,20 +72,28 @@ export default {
                     v => !!v || 'Nomor Harus Diisi'
                 ],
                 email: [
-                    v => !!v || 'Lokasi Harus Diisi',
+                    v => !!v || 'E-mail Harus Diisi',
                     v => /.+@.+\..+/.test(v) || 'E-mail Tidak Valid',
                 ],
                 ownerAddress: [
                     v => !!v || 'Alamat Pendaftar Harus Diisi'
                 ],
             },
+            phone:''
         }
+    },
+
+    mounted() {
+        api.getAllAbout() 
+            .then((response) => {
+                this.phone = response[0].phone
+            })
     },
 
     methods: {
         send() {
             if(this.$refs.form.validate()) {
-                window.open('https://api.whatsapp.com/send?phone='+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress);
+                window.open('https://api.whatsapp.com/send?phone=+62'+this.phone+'&text=[Daftar Mitra]%0aNama: '+this.data.name+'%0aNomor Yang Bisa Dihubungi: '+this.data.phoneNumber+'%0aEmail: '+this.data.email+'%0aAlamat Rumah Pemilik: '+this.data.ownerAddress);
             }
         }
     }

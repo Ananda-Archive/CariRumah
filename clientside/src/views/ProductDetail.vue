@@ -6,7 +6,7 @@
                 <v-row justify-center class="px-xl-16">
                     <v-col cols="12" class="text-center">
                         <v-row no-gutter>
-                            <v-col cols="12" sm="12" :md="[product.images.length>1? '8' : '12']">
+                            <v-col v-if="product.images.length>0" cols="12" sm="12" :md="[product.images.length>1? '8' : '12']">
                                 <v-card width="100%">
                                     <v-img style="cursor: pointer" :height="[$vuetify.breakpoint.xl? '500px' : '400px']" :src=product.images[0].image :lazy-src=product.images[0].image @click="index = 0">
                                         <template v-slot:placeholder>
@@ -19,6 +19,11 @@
                                             </v-row>
                                         </template>
                                     </v-img>
+                                </v-card>
+                            </v-col>
+                            <v-col v-else cols="12">
+                                <v-card width="100%">
+                                    <v-img style="cursor: pointer" :height="[$vuetify.breakpoint.xl? '500px' : '400px']" src="https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/no-image.jpg?alt=media&token=447162cf-bd0c-48e3-b57d-a68d24bcd2b7"></v-img>
                                 </v-card>
                             </v-col>
                             <v-col cols="4" v-if="product.images.length > 1 && !$vuetify.breakpoint.smAndDown">

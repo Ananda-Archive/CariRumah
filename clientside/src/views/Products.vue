@@ -242,7 +242,7 @@
                                     <v-row>
                                         <v-col class="text-left" cols="12" sm="12" md="4" xl="3" v-for="(product,idx) in items" :key="idx">
                                             <v-card :class="[$vuetify.breakpoint.smAndDown? 'mx-auto': '']" :width="[$vuetify.breakpoint.smAndDown? '90vw' : '600px']" @click="goTo(product.id)" style="cursor:pointer">
-                                                <v-img aspect-ratio="1"  height="200px" :lazy-src="product.images[0].image" :src="product.images[0].image">
+                                                <v-img v-if="product.images.length > 0" aspect-ratio="1"  height="200px" :lazy-src="product.images[0].image" :src="product.images[0].image">
                                                     <v-col cols="12" class="text-right" v-if="product.productCondition == 1">
                                                         <v-chip
                                                             text-color="white"
@@ -261,6 +261,17 @@
                                                             <v-progress-circular indeterminate color="black"></v-progress-circular>
                                                         </v-row>
                                                     </template>
+                                                </v-img>
+                                                <v-img v-else aspect-ratio="1"  height="200px" src="https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/no-image.jpg?alt=media&token=447162cf-bd0c-48e3-b57d-a68d24bcd2b7">
+                                                    <v-col cols="12" class="text-right" v-if="product.productCondition == 1">
+                                                        <v-chip
+                                                            text-color="white"
+                                                            color="primary"
+                                                            small
+                                                        >
+                                                            Baru
+                                                        </v-chip>
+                                                    </v-col>
                                                 </v-img>
                                                 <v-card-title v-if="$vuetify.breakpoint.lgAndDown">{{product.name.slice(0,15)}}</v-card-title>
                                                 <v-card-title v-if="$vuetify.breakpoint.xl">{{product.name.slice(0,17)}}</v-card-title>

@@ -11,16 +11,27 @@
 </template>
 
 <script>
+
+import api from '@/api'
+
 export default {
     data() {
         return {
-            phone:'+6287731492139'
+            phone:''
         }
+    },
+
+    mounted() {
+        api.getAllAbout() 
+            .then((response) => {
+                this.phone = response[0].phone
+            })
+        
     },
 
     methods: {
         messageMe() {
-            window.open('https://api.whatsapp.com/send?phone='+this.phone,'_blank');
+            window.open('https://api.whatsapp.com/send?phone=+62'+this.phone,'_blank');
         }
     }
 }

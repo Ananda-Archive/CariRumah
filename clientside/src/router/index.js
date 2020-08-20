@@ -109,6 +109,14 @@ Vue.use(VueRouter)
       auth: false
     }
   },
+  {
+    path: '/About',
+    name: 'About',
+    component: () => import('../views/About.vue'),
+    meta: {
+      auth: false
+    }
+  },
   // Admin Page
   {
     path: '/Login',
@@ -138,6 +146,14 @@ Vue.use(VueRouter)
     path: '/AdminArticle',
     name: 'AdminArticle',
     component: () => import('../views/admin/AdminArticle.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/AdminAbout',
+    name: 'AdminAbout',
+    component: () => import('../views/admin/AdminAbout.vue'),
     meta: {
       auth: true
     }

@@ -8,7 +8,7 @@
             <v-toolbar-title class="mr-10" @click="goTo('/Products')"><span :class="[this.$route.name == 'Products' ? 'selectedMenu' : 'hoverMenu']">Produk</span></v-toolbar-title>
             <v-toolbar-title class="mr-10" @click="goTo('/Credit')"><span :class="[this.$route.name == 'Credit' ? 'selectedMenu' : 'hoverMenu']">Simulasi Kredit</span></v-toolbar-title>
             <v-toolbar-title class="mr-10" @click="goTo('/Registration')"><span :class="[this.$route.name == 'Registration' ? 'selectedMenu' : 'hoverMenu']">Registrasi</span></v-toolbar-title>
-            <v-toolbar-title @click="goTo('/About')"><span :class="[this.$route.name == 'Contact' ? 'selectedMenu' : 'hoverMenu']">Tentang Kami</span></v-toolbar-title>
+            <v-toolbar-title @click="goTo('/About')"><span :class="[this.$route.name == 'About' ? 'selectedMenu' : 'hoverMenu']">Tentang Kami</span></v-toolbar-title>
         </v-app-bar>
         <v-app-bar v-else-if="breakPoint && this.$route.name != 'Login'" dark app flat color="primary" class="absolute px-2">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
@@ -79,6 +79,10 @@
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminArticle' ? 'primary--text' : '']">mdi-file-document-edit</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminArticle' ? 'primary--text' : '']">Artikel</v-list-item-title>
                         </v-list-item>
+                        <v-list-item link @click="goTo('/AdminAbout')">
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='AdminAbout' ? 'primary--text' : '']">mdi-account-settings</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='AdminAbout' ? 'primary--text' : '']">Pengaturan</v-list-item-title>
+                        </v-list-item>
                         <!-- <v-list-item link @click="goTo('/AdminMitra')">
                             <v-list-item-icon><v-icon :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">mdi-account-group</v-icon></v-list-item-icon>
                             <v-list-item-title :class="[this.$route.name=='AdminMitra' ? 'primary--text' : '']">Daftar Mitra</v-list-item-title>
@@ -96,7 +100,7 @@
                 <div justify-end>
                     <v-divider></v-divider>
                     <v-list dense>
-                        <v-list-item link>
+                        <v-list-item link @click="logout">
                             <v-list-item-icon><v-icon class="red--text">mdi-power</v-icon></v-list-item-icon>
                             <v-list-item-title class="red--text">Logout</v-list-item-title>
                         </v-list-item>
@@ -108,6 +112,9 @@
 </template>
 
 <script>
+
+import firebase from 'firebase'
+
 export default {
     
     name: 'NavigationBar',
@@ -124,6 +131,16 @@ export default {
             this.$router.push(path)
             window.scroll(0,0)
         },
+        logout() {
+            firebase.auth().signOut()
+                .then( () => {
+                this.$store.dispatch('mutateUid',null)
+                this.$router.push('/login')
+                })
+                .catch( (err) => {
+                alert(err)
+                })
+        }
     },
 
     computed: {

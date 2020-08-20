@@ -3,6 +3,8 @@ import axios from 'axios'
 const productTable = 'products'
 const promoTable = 'promo'
 const articleTable = 'article'
+const imageAPI = 'image'
+const aboutTable = 'about'
 const insertSuccessMessage = 'Berhasil ditambahkan'
 const updateSuccessMessage = 'Berhasil diperbarui'
 const deleteSuccessMessage = 'Berhasil dihapus'
@@ -134,6 +136,38 @@ const api = {
                     else reject(deleteFailedMessage)
                 })
         } )
+    },
+    uploadImage(image) {
+        return new Promise( (resolve, reject) => {
+            const data = new FormData()
+            data.append('image',image)
+            axios.post(imageAPI, data, {headers: {'Content-Type': 'multipart/form-data'}})
+                .then((response) => {
+                    resolve(response.data)
+                }) .catch(err => {
+                    if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        } )
+    },
+    getAllAbout() {
+        return new Promise ((resolve, reject) => {
+            axios.get(aboutTable)
+                .then((response) => {
+                    resolve(response.data)
+                }) .catch(err => {
+                        if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
+    },
+    updateAbout(about) {
+        return new Promise ((resolve, reject) => {
+            axios.put(aboutTable, about)
+                .then(() => {
+                    resolve(updateSuccessMessage)
+                }) .catch(err => {
+                        if(err.response.status == 500) reject(serverErrorMessage)
+                })
+        })
     },   
 }
 

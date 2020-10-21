@@ -11,10 +11,10 @@
                             style="cursor:pointer"
                             @click:row="editItem"
                         >
-                            <template v-slot:item.productIndex="{ item }">
+                            <template v-slot:[`item.productIndex`]="{ item }">
                                 <div class="justify-center">{{articles.indexOf(item)+1}}</div>
                             </template>
-                            <template v-slot:item.actions="{ item }">
+                            <template v-slot:[`item.actions`]="{ item }">
                                 <!-- <v-icon class="mr-4" @click.stop="editItem(item)">mdi-pencil</v-icon> -->
                                 <v-icon @click.stop="confirmDelete(item)">mdi-delete</v-icon>
                             </template>

@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `agent`
 --
 
-CREATE TABLE `agent` (
+CREATE TABLE agent (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `agent` (
 -- Table structure for table `article`
 --
 
-CREATE TABLE `article` (
+CREATE TABLE article (
   `id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
   `content` mediumtext NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `article` (
 -- Table structure for table `mitra`
 --
 
-CREATE TABLE `mitra` (
+CREATE TABLE mitra (
   `id` int(11) NOT NULL,
   `propertyName` varchar(200) NOT NULL,
   `propertyAddress` varchar(300) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `mitra` (
 -- Dumping data for table `mitra`
 --
 
-INSERT INTO `mitra` (`id`, `propertyName`, `propertyAddress`, `propertylt`, `propertylb`, `propertyBedroom`, `propertyBathroom`, `propertyElectricity`, `propertyFacility`, `propertyLetterStatus`, `propertyTypePrice`, `ownerName`, `ownerAddress`, `ownerPhone`, `ownerEmail`, `ownerLetter`, `ownerCommission`, `status`) VALUES
+INSERT INTO mitra (`id`, `propertyName`, `propertyAddress`, `propertylt`, `propertylb`, `propertyBedroom`, `propertyBathroom`, `propertyElectricity`, `propertyFacility`, `propertyLetterStatus`, `propertyTypePrice`, `ownerName`, `ownerAddress`, `ownerPhone`, `ownerEmail`, `ownerLetter`, `ownerCommission`, `status`) VALUES
 (1, 'RUMAH XYSKUYYY', 'XYSKUYYY', 120, 100, 5, 1, 1300, 'blablabla', 'blablabla', 'blablabla', 'Ananda', 'Jalan XX', '087731492139', 'ananda@gmail.com', 'blablabla', 0.5, 2),
 (2, 'RUMAH XY', 'Jalan X', 120, 100, 5, 1, 1300, 'blablabla', 'blablabla', 'blablabla', 'Ananda', 'Jalan XX', '087731492139', 'ananda@gmail.com', 'blablabla', 2, 1);
 
@@ -93,7 +93,7 @@ INSERT INTO `mitra` (`id`, `propertyName`, `propertyAddress`, `propertylt`, `pro
 -- Table structure for table `products`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE products (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `price` varchar(50) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `location`, `facility`, `document`, `lt`, `lb`, `status`, `productCondition`, `contactPerson`, `property`) VALUES
+INSERT INTO products (`id`, `name`, `price`, `location`, `facility`, `document`, `lt`, `lb`, `status`, `productCondition`, `contactPerson`, `property`) VALUES
 (24, 'Rumah X', '20000000000', 'Dki Jakarta', '<ul><li>Lengkap</li><li>Kamar mandi UwU</li></ul>', '<p><strong>GoOOOOKS </strong>lah pokoknya</p>', 2000, 1500, 1, 1, '087731492139', 1),
 (27, 'RUMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '3000000', 'Aceh', '<ol><li>UwU</li></ol>', '<ul><li>UwU</li></ul>', 200, 100, 1, 2, '088888888', 6),
 (28, 'Rumah A', '1230000', 'Bali', '<ul><li>Lengkap</li><li>Kamar mandi UwU</li></ul>', '<p><strong>GoOOOOKS </strong>lah pokoknya</p>', 340, 240, 1, 2, '087777777', 4),
@@ -124,7 +124,7 @@ INSERT INTO `products` (`id`, `name`, `price`, `location`, `facility`, `document
 -- Table structure for table `products_image`
 --
 
-CREATE TABLE `products_image` (
+CREATE TABLE products_image (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `image` text NOT NULL
@@ -134,7 +134,7 @@ CREATE TABLE `products_image` (
 -- Dumping data for table `products_image`
 --
 
-INSERT INTO `products_image` (`id`, `product_id`, `image`) VALUES
+INSERT INTO products_image (`id`, `product_id`, `image`) VALUES
 (116, 24, 'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/product%2F0.9132649987653556_1lwqt9n10wr4u0r2rcjq20ttg.jpg?alt=media&token=154d416b-ba3d-4cbb-97cc-56b36955a736'),
 (117, 24, 'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/product%2F0.6476843970566972_9c9a4b904adf1a182ae8e0b76dee57d1.jpg?alt=media&token=186f5b15-7a4f-4856-b1f6-4e85a2ab7f00'),
 (118, 24, 'https://firebasestorage.googleapis.com/v0/b/carirumah-45009.appspot.com/o/product%2F0.5099429596616523_102662945_1520033738158299_2196670815983068892_o.png?alt=media&token=b35cac27-a4e1-4ce8-8d6c-62d615f3c619'),
@@ -156,31 +156,31 @@ INSERT INTO `products_image` (`id`, `product_id`, `image`) VALUES
 --
 -- Indexes for table `agent`
 --
-ALTER TABLE `agent`
+ALTER TABLE agent
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `article`
 --
-ALTER TABLE `article`
+ALTER TABLE article
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `mitra`
 --
-ALTER TABLE `mitra`
+ALTER TABLE mitra
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `products`
 --
-ALTER TABLE `products`
+ALTER TABLE products
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `products_image`
 --
-ALTER TABLE `products_image`
+ALTER TABLE products_image
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 

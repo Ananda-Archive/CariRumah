@@ -182,7 +182,7 @@ ALTER TABLE products
 --
 ALTER TABLE products_image
   ADD PRIMARY KEY (id),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY product_id (product_id);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -192,31 +192,31 @@ ALTER TABLE products_image
 -- AUTO_INCREMENT for table `agent`
 --
 ALTER TABLE agent
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE article
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mitra`
 --
 ALTER TABLE mitra
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE products
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `products_image`
 --
 ALTER TABLE products_image
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- Constraints for dumped tables
@@ -225,7 +225,7 @@ ALTER TABLE products_image
 --
 -- Constraints for table `products_image`
 --
-ALTER TABLE `products_image`
+ALTER TABLE products_image
   ADD CONSTRAINT `products_image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

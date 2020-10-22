@@ -36,7 +36,7 @@ CREATE TABLE agent (
   education varchar(25) NOT NULL,
   email varchar(100) NOT NULL,
   phoneNumber varchar(25) NOT NULL,
-  status tinyint(4) NOT NULL DEFAULT 1
+  status tinyint NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

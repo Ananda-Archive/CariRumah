@@ -2,13 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Agent extends CI_Model {
-    private $name;
-    private $address;
-    private $city;
-    private $education;
-    private $email;
-    private $phoneNumber;
-    private $status;
     const TABLE_NAME = 'agent';
 
     public function create($name, $address, $city, $education, $email, $phoneNumber, $status) {

@@ -2,9 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Products_Image extends CI_Model {
-    private $id;
-    private $product_id;
-    private $image;
     const TABLE_NAME = 'products_image';
 
     public function create($product_id, $images) {

@@ -2,9 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Article extends CI_Model {
-    private $title;
-    private $content;
-    private $image;
     const TABLE_NAME = 'article';
 
     public function create($title, $content, $image) {

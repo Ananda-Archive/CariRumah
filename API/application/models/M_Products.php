@@ -2,17 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Products extends CI_Model {
-    private $id;
-    private $name;
-    private $location;
-    private $facility;
-    private $document;
-    private $lt;
-    private $lb;
-    private $status;
-    private $contactPerson;
-    private $productCondition;
-    private $property;
     const TABLE_NAME = 'products';
 
     public function create($name, $price, $location, $facility, $document, $lt, $lb, $contactPerson, $productCondition, $property) {

@@ -2,23 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Mitra extends CI_Model {
-    private $propertyName;
-    private $propertyAddress;
-    private $propertylt;
-    private $propertylb;
-    private $propertyBedroom;
-    private $propertyBathroom;
-    private $propertyElectricity;
-    private $propertyFacility;
-    private $propertyLetterStatus;
-    private $propertyTypePrice;
-    private $ownerName;
-    private $ownerAddress;
-    private $ownerPhone;
-    private $ownerEmail;
-    private $ownerLetter;
-    private $ownerCommission;
-    private $status;
     const TABLE_NAME = 'mitra';
 
     public function create(

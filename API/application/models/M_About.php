@@ -2,8 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_About extends CI_Model {
-    private $about;
-    private $phone;
     const TABLE_NAME = 'about';
 
     public function create($about, $phone) {

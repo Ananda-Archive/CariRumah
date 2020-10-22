@@ -39,7 +39,7 @@ class Promo extends REST_Controller {
         }
 
         // Create
-        if($id = $this->M_Promo->create($title,$content,$image)) {
+        if($this->M_Promo->create($title,$content,$image)) {
             $this->response(
                 array(
                     'status' => TRUE,

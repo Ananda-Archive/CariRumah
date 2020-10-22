@@ -39,7 +39,7 @@ class Article extends REST_Controller {
         }
 
         // Create
-        if($id = $this->M_Article->create($title,$content,$image)) {
+        if($this->M_Article->create($title,$content,$image)) {
             $this->response(
                 array(
                     'status' => TRUE,

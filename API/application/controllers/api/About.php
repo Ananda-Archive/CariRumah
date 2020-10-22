@@ -82,7 +82,6 @@ class About extends REST_Controller {
         switch($command) {
             // Get All Data without any condition
             default:
-                $index = 0;
                 $result = $this->M_About->get_all();
                 $this->response($result,REST_Controller::HTTP_OK);
         }

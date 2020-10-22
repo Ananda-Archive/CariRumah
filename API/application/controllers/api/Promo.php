@@ -158,16 +158,15 @@ class Promo extends REST_Controller {
                 ),
                 REST_Controller::HTTP_OK
             );
-        } else {
-            $this->response(
-                array(
-                    'status' => FALSE,
-                    'message' => $this::DELETE_FAILED_MESSAGE
-
-                ),
-                REST_Controller::HTTP_INTERNAL_SERVER_ERROR
-            );
         }
+        $this->response(
+            array(
+                'status' => FALSE,
+                'message' => $this::DELETE_FAILED_MESSAGE
+
+            ),
+            REST_Controller::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
 
 }

@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE agent (
-  'id' int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `education` varchar(25) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phoneNumber` varchar(25) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1
+  id int(11) NOT NULL,
+  name varchar(200) NOT NULL,
+  address varchar(200) NOT NULL,
+  city varchar(50) NOT NULL,
+  education varchar(25) NOT NULL,
+  email varchar(100) NOT NULL,
+  phoneNumber varchar(25) NOT NULL,
+  status tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

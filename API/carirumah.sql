@@ -105,7 +105,7 @@ CREATE TABLE products (
   status tinyint(4) NOT NULL DEFAULT 1,
   productCondition tinyint(4) NOT NULL,
   contactPerson varchar(15) NOT NULL,
-  property smallint(6) NOT NULL
+  property smallint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -126,7 +126,7 @@ INSERT INTO products (id, name, price, location, facility, document, lt, lb, sta
 
 CREATE TABLE products_image (
   id INTEGER NOT NULL,
-  product_id int(11) NOT NULL,
+  product_id INTEGER NOT NULL,
   image text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

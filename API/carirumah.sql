@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE agent (
-  id int(11) NOT NULL,
+  id INTEGER NOT NULL,
   name varchar(200) NOT NULL,
   address varchar(200) NOT NULL,
   city varchar(50) NOT NULL,

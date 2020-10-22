@@ -115,15 +115,14 @@ class Promo extends REST_Controller {
                 ),
                 REST_Controller::HTTP_OK
             );
-        } else {
-            $this->response(
-                array(
-                    'status' => FALSE,
-                    'message' => 'test2'
-                ),
-                REST_Controller::HTTP_BAD_REQUEST
-            );
         }
+        $this->response(
+            array(
+                'status' => FALSE,
+                'message' => 'test2'
+            ),
+            REST_Controller::HTTP_BAD_REQUEST
+        );
     }
 
     public  function index_delete() {

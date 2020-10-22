@@ -39,16 +39,15 @@ class Image extends REST_Controller {
                 ),
                 REST_Controller::HTTP_INTERNAL_SERVER_ERROR
             );
-        } else {
-            $uploadData = $this->upload->data();
-            $this->response(
-                array(
-                    'status' => TRUE,
-                    'message' => base_url() . 'uploads/' . $uploadData['file_name']
-                ),
-                REST_Controller::HTTP_OK
-            );
         }
+        $uploadData = $this->upload->data();
+        $this->response(
+            array(
+                'status' => TRUE,
+                'message' => base_url() . 'uploads/' . $uploadData['file_name']
+            ),
+            REST_Controller::HTTP_OK
+        );
     }
 
 }

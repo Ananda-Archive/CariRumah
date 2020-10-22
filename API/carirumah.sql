@@ -36,7 +36,7 @@ CREATE TABLE agent (
   education varchar(25) NOT NULL,
   email varchar(100) NOT NULL,
   phoneNumber varchar(25) NOT NULL,
-  status tinyint NOT NULL DEFAULT 1
+  status tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -46,10 +46,10 @@ CREATE TABLE agent (
 --
 
 CREATE TABLE article (
-  `id` int(11) NOT NULL,
-  `title` varchar(200) NOT NULL,
-  `content` mediumtext NOT NULL,
-  `image` mediumtext DEFAULT NULL
+  id INTEGER NOT NULL,
+  title varchar(200) NOT NULL,
+  content mediumtext NOT NULL,
+  image mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -59,24 +59,24 @@ CREATE TABLE article (
 --
 
 CREATE TABLE mitra (
-  `id` int(11) NOT NULL,
-  `propertyName` varchar(200) NOT NULL,
-  `propertyAddress` varchar(300) NOT NULL,
-  `propertylt` int(11) NOT NULL,
-  `propertylb` int(11) NOT NULL,
-  `propertyBedroom` int(11) NOT NULL,
-  `propertyBathroom` int(11) NOT NULL,
-  `propertyElectricity` int(11) NOT NULL,
-  `propertyFacility` mediumtext NOT NULL,
-  `propertyLetterStatus` mediumtext NOT NULL,
-  `propertyTypePrice` mediumtext NOT NULL,
-  `ownerName` varchar(200) NOT NULL,
-  `ownerAddress` varchar(300) NOT NULL,
-  `ownerPhone` varchar(20) NOT NULL,
-  `ownerEmail` varchar(50) NOT NULL,
-  `ownerLetter` mediumtext NOT NULL,
-  `ownerCommission` float NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1
+  id INTEGER NOT NULL,
+  propertyName varchar(200) NOT NULL,
+  propertyAddress varchar(300) NOT NULL,
+  propertylt INTEGER NOT NULL,
+  propertylb INTEGER NOT NULL,
+  propertyBedroom INTEGER NOT NULL,
+  propertyBathroom INTEGER NOT NULL,
+  propertyElectricity INTEGER NOT NULL,
+  propertyFacility mediumtext NOT NULL,
+  propertyLetterStatus mediumtext NOT NULL,
+  propertyTypePrice mediumtext NOT NULL,
+  ownerName varchar(200) NOT NULL,
+  ownerAddress varchar(300) NOT NULL,
+  ownerPhone varchar(20) NOT NULL,
+  ownerEmail varchar(50) NOT NULL,
+  ownerLetter mediumtext NOT NULL,
+  ownerCommission float NOT NULL,
+  status tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -94,18 +94,18 @@ INSERT INTO mitra (id, propertyName, propertyAddress, propertylt, propertylb, pr
 --
 
 CREATE TABLE products (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `price` varchar(50) NOT NULL,
-  `location` varchar(100) NOT NULL,
-  `facility` mediumtext DEFAULT NULL,
-  `document` mediumtext DEFAULT NULL,
-  `lt` int(11) NOT NULL,
-  `lb` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1,
-  `productCondition` tinyint(4) NOT NULL,
-  `contactPerson` varchar(15) NOT NULL,
-  `property` smallint(6) NOT NULL
+  id INTEGER NOT NULL,
+  name varchar(200) NOT NULL,
+  price varchar(50) NOT NULL,
+  location varchar(100) NOT NULL,
+  facility mediumtext DEFAULT NULL,
+  document mediumtext DEFAULT NULL,
+  lt INTEGER NOT NULL,
+  lb INTEGER NOT NULL,
+  status tinyint(4) NOT NULL DEFAULT 1,
+  productCondition tinyint(4) NOT NULL,
+  contactPerson varchar(15) NOT NULL,
+  property smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -125,9 +125,9 @@ INSERT INTO products (id, name, price, location, facility, document, lt, lb, sta
 --
 
 CREATE TABLE products_image (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `image` text NOT NULL
+  id INTEGER NOT NULL,
+  product_id int(11) NOT NULL,
+  image text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -192,31 +192,31 @@ ALTER TABLE products_image
 -- AUTO_INCREMENT for table `agent`
 --
 ALTER TABLE agent
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY id INTEGER NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE article
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY id INTEGER NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mitra`
 --
 ALTER TABLE mitra
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY id INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE products
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY id INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `products_image`
 --
 ALTER TABLE products_image
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY id INTEGER NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- Constraints for dumped tables

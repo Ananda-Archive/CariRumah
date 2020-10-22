@@ -70,16 +70,7 @@ class Products extends REST_Controller {
                     ),
                     REST_Controller::HTTP_CREATED
                 );
-            } else {
-                $this->response(
-                    array(
-                        'status' => FALSE,
-                        'message' => $this::INSERT_FAILED_MESSAGE
-                    ),
-                    REST_Controller::HTTP_INTERNAL_SERVER_ERROR
-                );
-            }
-        } else {
+            } 
             $this->response(
                 array(
                     'status' => FALSE,
@@ -87,7 +78,15 @@ class Products extends REST_Controller {
                 ),
                 REST_Controller::HTTP_INTERNAL_SERVER_ERROR
             );
+            
         }
+        $this->response(
+            array(
+                'status' => FALSE,
+                'message' => $this::INSERT_FAILED_MESSAGE
+            ),
+            REST_Controller::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
 
 

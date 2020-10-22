@@ -18,7 +18,7 @@ class Products extends REST_Controller {
         // $method = $_SERVER['REQUEST_METHOD'];
         // if($method == "OPTIONS") {
         // die();
-        }
+        // }
     }
 
     public function index_post() {

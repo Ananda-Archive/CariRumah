@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH');
 
 class M_Products_Image extends CI_Model {
     const TABLE_NAME = 'products_image';

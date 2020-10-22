@@ -150,6 +150,9 @@ class Products extends REST_Controller {
         if(isset($price)) {
             $datas = array_merge($datas, array('price' => $price));
         }
+        if(isset($name)) {
+            $datas = array_merge($datas, array('name' => $name));
+        }
         if(isset($location)) {
             $datas = array_merge($datas, array('location' => $location));
         }

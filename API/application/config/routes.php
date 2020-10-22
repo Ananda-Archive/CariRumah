@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH');
 
 $route['default_controller'] = 'welcome';
 $route['home'] = 'Pages/home';

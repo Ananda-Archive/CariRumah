@@ -38,5 +38,4 @@ class M_Promo extends CI_Model {
         return $this->db->affected_rows();
     }
 }
-
 ?>

@@ -191,45 +191,42 @@ class Products extends REST_Controller {
                         ),
                         REST_Controller::HTTP_OK
                     );
-                } else {
-                    if(count($images) > 0) {
-                        $this->response(
-                            array(
-                                'status' => TRUE,
-                                'message' => $this::UPDATE_SUCCESS_MESSSAGE
-            
-                            ),
-                            REST_Controller::HTTP_OK
-                        );
-                    } else {
-                        $this->response(
-                            array(
-                                'status' => FALSE,
-                                'message' => $images
-                            ),
-                            REST_Controller::HTTP_BAD_REQUEST
-                        );
-                    }
                 }
-            } else {
-                $this->response(
-                    array(
-                        'status' => TRUE,
-                        'message' => $this::UPDATE_SUCCESS_MESSSAGE
-    
-                    ),
-                    REST_Controller::HTTP_OK
-                );
+                if(count($images) > 0) {
+                    $this->response(
+                        array(
+                            'status' => TRUE,
+                            'message' => $this::UPDATE_SUCCESS_MESSSAGE
+        
+                        ),
+                        REST_Controller::HTTP_OK
+                    );
+                } else {
+                    $this->response(
+                        array(
+                            'status' => FALSE,
+                            'message' => $images
+                        ),
+                        REST_Controller::HTTP_BAD_REQUEST
+                    );
+                }
             }
-        } else {
             $this->response(
                 array(
-                    'status' => FALSE,
-                    'message' => 'test2'
+                    'status' => TRUE,
+                    'message' => $this::UPDATE_SUCCESS_MESSSAGE
+
                 ),
-                REST_Controller::HTTP_BAD_REQUEST
+                REST_Controller::HTTP_OK
             );
         }
+        $this->response(
+            array(
+                'status' => FALSE,
+                'message' => 'test2'
+            ),
+            REST_Controller::HTTP_BAD_REQUEST
+        );
     }
 
     public  function index_delete() {

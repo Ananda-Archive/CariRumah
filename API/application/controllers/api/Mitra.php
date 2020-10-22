@@ -185,15 +185,14 @@ class Mitra extends REST_Controller {
                 ),
                 REST_Controller::HTTP_OK
             );
-        } else {
-            $this->response(
-                array(
-                    'status' => FALSE,
-                    'message' => $this::UPDATE_FAILED_MESSAGE
-                ),
-                REST_Controller::HTTP_INTERNAL_SERVER_ERROR
-            );
         }
+        $this->response(
+            array(
+                'status' => FALSE,
+                'message' => $this::UPDATE_FAILED_MESSAGE
+            ),
+            REST_Controller::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
 
     public  function index_delete() {
